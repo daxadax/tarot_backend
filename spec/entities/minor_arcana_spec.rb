@@ -1,0 +1,36 @@
+require 'spec_helper'
+
+class MinorArcanaSpec < EntitySpec
+  let(:arcana)  { :minor }
+  let(:id)      { 'w_7'}
+  let(:suit)    { :wands }
+  let(:rank)    { :seven }
+  let(:card)    { Entities::MinorArcana.new(id) }
+
+  describe "creation" do
+    describe "without" do
+      describe "id" do
+        let(:id) { '' }
+
+        it('fails') { assert_failure {card} }
+      end
+    end
+
+    describe "with wrong values" do
+      describe "id" do
+        let(:id) { '7_w' }
+
+        it('fails') { assert_failure {card} }
+      end
+    end
+
+    it "is successful with correct values" do
+      assert_kind_of Entities::MinorArcana, card
+
+      assert_equal arcana,  card.arcana
+      assert_equal suit,    card.suit
+      assert_equal rank,    card.rank
+    end
+  end
+
+end
