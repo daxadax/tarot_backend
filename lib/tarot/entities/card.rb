@@ -9,6 +9,14 @@ module Tarot
         @arcana = arcana
       end
 
+      def major?
+        @arcana == :major
+      end
+
+      def minor?
+        @arcana == :minor
+      end
+
       private
 
       def ensure_valid_arcana!(arcana)

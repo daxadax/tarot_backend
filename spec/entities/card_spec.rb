@@ -28,4 +28,11 @@ class CardSpec < EntitySpec
       assert_equal arcana, card.arcana
     end
   end
+
+  describe "major?" do
+    it "determines the type of card" do
+      assert_equal true,  card.major?
+      assert_equal false, card.minor?
+    end
+  end
 end
