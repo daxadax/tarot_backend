@@ -30,20 +30,7 @@ module Tarot
       def build_rank
         rank_id = deserialized_id.last.to_i
 
-        case
-        when rank_id == 1
-          :ace
-        when rank_id.between?(1,10)
-          rank_map[rank_id]
-        when rank_id == 11
-          :page
-        when rank_id == 12
-          :knight
-        when rank_id == 13
-          :queen
-        when rank_id == 14
-          :king
-        end
+        rank_map[rank_id]
       end
 
       def deserialized_id
@@ -52,7 +39,7 @@ module Tarot
 
       def rank_map
         {
-          1 => :one,
+          1 => :ace,
           2 => :two,
           3 => :three,
           4 => :four,
@@ -61,7 +48,11 @@ module Tarot
           7 => :seven,
           8 => :eight,
           9 => :nine,
-          10 => :ten
+          10 => :ten,
+          11 => :page,
+          12 => :knight,
+          13 => :queen,
+          14 => :king
         }
       end
 
