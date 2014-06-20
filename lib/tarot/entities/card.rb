@@ -2,11 +2,15 @@ module Tarot
   module Entities
     class Card < Entity
       attr_reader :arcana
+      attr_accessor :associations
 
       def initialize(arcana)
         ensure_valid_arcana!(arcana)
 
-        @arcana = arcana
+
+        @arcana           = arcana
+        @associations     = []
+        @card_orientation = determine_card_orientation
       end
 
       def major?
@@ -17,7 +21,16 @@ module Tarot
         @arcana == :minor
       end
 
+      def reversed?
+        @card_orientation == :reversed
+      end
+
       private
+
+      def determine_card_orientation
+        return :reversed if rand > 0.5
+        :upright
+      end
 
       def ensure_valid_arcana!(arcana)
         ensure_required_input!(:arcana, arcana)

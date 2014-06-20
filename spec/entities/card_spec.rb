@@ -27,12 +27,24 @@ class CardSpec < EntitySpec
       assert_kind_of Entities::Card, card
       assert_equal arcana, card.arcana
     end
+
+    it "has a chance to be reversed" do
+      assert_respond_to card, :reversed?
+    end
   end
 
-  describe "major?" do
+  describe "major?/minor?" do
     it "determines the type of card" do
       assert_equal true,  card.major?
       assert_equal false, card.minor?
+    end
+  end
+
+  describe "associations" do
+    it "can build associations after creations" do
+      assert_empty card.associations
+      card.associations << "some meaning"
+      assert_equal "some meaning", card.associations.first
     end
   end
 end
