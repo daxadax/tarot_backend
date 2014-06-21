@@ -28,32 +28,13 @@ module Tarot
       end
 
       def build_rank
-        rank_id = deserialized_id.last.to_i
+        rank_id = deserialized_id.last
 
-        rank_map[rank_id]
+        MINOR_ARCANA[rank_id]
       end
 
       def deserialized_id
         @id.split('_')
-      end
-
-      def rank_map
-        {
-          1 => :ace,
-          2 => :two,
-          3 => :three,
-          4 => :four,
-          5 => :five,
-          6 => :six,
-          7 => :seven,
-          8 => :eight,
-          9 => :nine,
-          10 => :ten,
-          11 => :page,
-          12 => :knight,
-          13 => :queen,
-          14 => :king
-        }
       end
 
       def ensure_valid_input!(id)
@@ -65,7 +46,7 @@ module Tarot
         split_id = id.split('_')
 
         ensure_valid_suit!(split_id.first)
-        ensure_valid_rank!(split_id.last.to_i)
+        ensure_valid_rank!(split_id.last)
       end
 
       def ensure_valid_suit!(suit_id)
@@ -87,7 +68,7 @@ module Tarot
       end
 
       def valid_ranks
-        (1..14).to_a
+        MINOR_ARCANA.keys
       end
 
     end

@@ -7,14 +7,14 @@ module Tarot
         ensure_valid_input!(id)
         super(:major)
 
-        @title  = titles[id]
+        @title  = MAJOR_ARCANA[id]
         @id     = id
       end
 
       private
 
       def ensure_valid_input!(id)
-        ensure_required_input!(:id, id, {:type => Integer})
+        ensure_required_input!(:id, id)
         ensure_valid_id!(id)
       end
 
@@ -25,35 +25,8 @@ module Tarot
         end
       end
 
-      def titles
-        {
-          0 => 'The Fool',
-          1 => 'The Magician',
-          2 => 'The High Priestess',
-          3 => 'The Empress',
-          4 => 'The Emperor',
-          5 => 'The Hierophant',
-          6 => 'The Lovers',
-          7 => 'The Chariot',
-          8 => 'Strength',
-          9 => 'The Hermit',
-          10 => 'The Wheel',
-          11 => 'Justice',
-          12 => 'The Hanged Man',
-          13 => 'Death',
-          14 => 'Temperance',
-          15 => 'The Devil',
-          16 => 'The Tower',
-          17 => 'The Star',
-          18 => 'The Moon',
-          19 => 'The Sun',
-          20 => 'Judgement',
-          21 => 'The World'
-        }
-      end
-
       def valid_ids
-        (0..21).to_a
+        MAJOR_ARCANA.keys
       end
 
     end

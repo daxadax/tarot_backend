@@ -2,7 +2,7 @@ require 'spec_helper'
 
 class MinorArcanaSpec < EntitySpec
   let(:arcana)  { :minor }
-  let(:id)      { 'w_7'}
+  let(:id)      { 'w_07'}
   let(:rank)    { :seven }
   let(:card)    { Entities::MinorArcana.new(id) }
 
@@ -17,7 +17,7 @@ class MinorArcanaSpec < EntitySpec
 
     describe "with wrong values" do
       describe "id" do
-        let(:id) { '7_w' }
+        let(:id) { '07_w' }
 
         it('fails') { assert_failure {card} }
       end

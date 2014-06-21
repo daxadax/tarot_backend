@@ -1,54 +1,57 @@
 module Tarot
   module Entities
-    class Deck
+    class Deck < Entity
+      attr_reader :name
 
-      def initialize
-        @deck = []
+      def initialize(name = nil)
+        ensure_valid_deck_name!(name) unless name.nil?
+
+        @name   = name || AVAILABLE_DECKS.first
+        @cards  = []
       end
 
       def deal(number = 9)
         build_new_deck
 
-        deck.shuffle.pop(number)
+        cards.shuffle.pop(number)
       end
 
       private
 
       def build_new_deck
-        deck.clear
+        cards.clear
         build_minor_arcana
         build_major_arcana
-        deck.flatten
+        cards.flatten
       end
 
       def build_minor_arcana
         suits.each do |suit|
-          minor_arcana.each do |rank|
-            deck << Entities::MinorArcana.new("#{suit}_#{rank}")
+          MINOR_ARCANA.keys.each do |rank|
+            cards << Entities::MinorArcana.new("#{suit}_#{rank}")
           end
         end
       end
 
       def build_major_arcana
-        major_arcana.each do |id|
-          deck << Entities::MajorArcana.new(id)
+        MAJOR_ARCANA.keys.each do |id|
+          cards << Entities::MajorArcana.new(id)
         end
       end
 
-      def deck
-        @deck
+      def ensure_valid_deck_name!(name)
+        unless AVAILABLE_DECKS.include?(name)
+          reason = "#{name} is not an available deck"
+          raise_argument_error(reason, name)
+        end
+      end
+
+      def cards
+        @cards
       end
 
       def suits
         %w[w p c s]
-      end
-
-      def minor_arcana
-        (1..14).to_a
-      end
-
-      def major_arcana
-        (0..21).to_a
       end
 
     end

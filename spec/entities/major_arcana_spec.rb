@@ -3,7 +3,7 @@ require 'spec_helper'
 class MajorArcanaSpec < EntitySpec
   let(:title)   { 'The Chariot' }
   let(:arcana)  { :major }
-  let(:id)      { 7 }
+  let(:id)      { '07' }
   let(:card)    { Entities::MajorArcana.new(id) }
 
   describe "creation" do
