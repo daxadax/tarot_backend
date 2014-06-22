@@ -3,14 +3,11 @@ module Tarot
     class Deck < Entity
       attr_reader :name
 
-      def initialize(name = nil)
-        ensure_valid_deck_name!(name) unless name.nil?
-
-        @name   = name || AVAILABLE_DECKS.first
+      def initialize
         @cards  = []
       end
 
-      def deal(number = 9)
+      def deal(number)
         build_new_deck
 
         cards.shuffle.pop(number)
@@ -36,13 +33,6 @@ module Tarot
       def build_major_arcana
         MAJOR_ARCANA.keys.each do |id|
           cards << Entities::MajorArcana.new(id)
-        end
-      end
-
-      def ensure_valid_deck_name!(name)
-        unless AVAILABLE_DECKS.include?(name)
-          reason = "#{name} is not an available deck"
-          raise_argument_error(reason, name)
         end
       end
 
