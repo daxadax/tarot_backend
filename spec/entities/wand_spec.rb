@@ -2,7 +2,8 @@ require 'spec_helper'
 
 class WandSpec < EntitySpec
 
-  let(:suit)    { Entities::Wand }
+  let(:suit)      { Entities::Wand }
+  let(:suit_name) { "Wands" }
 
   describe 'initialization' do
     let(:result)  { suit.new }
@@ -10,7 +11,8 @@ class WandSpec < EntitySpec
     it "creates a new object for the given suit" do
       assert_kind_of suit, result
 
-      assert_empty result.associations
+      assert_equal suit_name, result.name
+      assert_empty            result.associations
     end
   end
 
