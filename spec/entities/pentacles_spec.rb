@@ -1,35 +1,26 @@
 require 'spec_helper'
 
-class PentacleSpec < EntitySpec
+class PentacleSpec < SuitSpec
 
-  let(:suit)    { Entities::Pentacle }
+  let(:suit) { :pentacles }
 
-  describe 'initialization' do
-    let(:result)  { suit.new }
-
-    it "creates a new object for the given suit" do
-      assert_kind_of suit, result
-
-      assert_empty result.associations
+  describe "initialization" do
+    it "creates a new object with default associations for the given suit" do
+      assert_creation_of_suit(suit)
     end
   end
 
-  describe "add_associations" do
-    let(:pentacle)          { suit.new }
-    let(:associations)  { ['fire', 'captain planet'] }
-
-    it "can set new associations" do
-      pentacle.add_associations(associations)
-
-      assert_equal associations, pentacle.associations
+  describe "adding new associations" do
+    let(:associations) do
+      ['fire', 'captain planet']
     end
 
-    describe "when associations are not given as an array" do
-      let(:associations) { 'fire' }
+    it "succeeds if given as an array" do
+      assert_new_associations_are_added(associations)
+    end
 
-      it "fails" do
-        assert_failure { pentacle.add_associations(associations) }
-      end
+    it "fails otherwise" do
+      refute_new_associations_are_added(associations.first)
     end
   end
 

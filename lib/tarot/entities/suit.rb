@@ -5,7 +5,7 @@ module Tarot
 
       def initialize
         @name         = build_suit_name
-        @associations = []
+        @associations = Array.new(default_associations)
       end
 
       def add_associations(new_associations)
@@ -16,8 +16,12 @@ module Tarot
 
       private
 
+      def default_associations
+        SUIT_ASSOCIATIONS[@name.downcase.to_sym]
+      end
+
       def build_suit_name
-        (self.class.name.split('::').last) + 's'
+        (self.class.name.split('::').last)
       end
 
       def ensure_valid_associations!(associations)
