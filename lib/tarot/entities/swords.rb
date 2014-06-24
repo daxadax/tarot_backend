@@ -1,6 +1,6 @@
 module Tarot
   module Entities
-    class Cup < Suit
+    class Swords < Suit
 
       def initialize
         super

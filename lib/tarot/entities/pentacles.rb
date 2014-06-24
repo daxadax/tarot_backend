@@ -1,6 +1,6 @@
 module Tarot
   module Entities
-    class Wand < Suit
+    class Pentacles < Suit
 
       def initialize
         super

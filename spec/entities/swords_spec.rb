@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-class SwordSpec < EntitySpec
+class SwordsSpec < EntitySpec
 
   let(:suit)    { Entities::Sword }
 
