@@ -13,10 +13,10 @@ module Tarot
   }
 
   SUIT_ASSOCIATIONS = {
-    :wand     => %w[instinctual],
-    :pentacle => %w[practical logistical],
-    :cup      => %w[emotional cultural social],
-    :sword    => %w[intellectual]
+    :wands      => %w[instinctual],
+    :pentacles  => %w[practical logistical],
+    :cups       => %w[emotional cultural social],
+    :swords     => %w[intellectual]
   }
 
   MAJOR_ARCANA      = {

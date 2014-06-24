@@ -17,13 +17,13 @@ module Tarot
       def build_suit
         case deserialized_id.first
         when 'w'
-          Entities::Wand.new
+          Entities::Wands.new
         when 'p'
-          Entities::Pentacle.new
+          Entities::Pentacles.new
         when 'c'
-          Entities::Cup.new
+          Entities::Cups.new
         when 's'
-          Entities::Sword.new
+          Entities::Swords.new
         end
       end
 
