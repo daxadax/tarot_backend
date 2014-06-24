@@ -4,12 +4,22 @@ require "tarot/version"
 require_relative "tarot/support/validation_helpers"
 
 require_relative "tarot/entities"
+require_relative "tarot/use_cases"
 
 module Tarot
 
-  AVAILABLE_DECKS = [ :rider_waite, :herbal ]
+  LAYOUTS           = {
+    :enneagram => 9
+  }
 
-  MAJOR_ARCANA    = {
+  SUIT_ASSOCIATIONS = {
+    :wand     => %w[instinctual],
+    :pentacle => %w[practical logistical],
+    :cup      => %w[emotional cultural social],
+    :sword    => %w[intellectual]
+  }
+
+  MAJOR_ARCANA      = {
     '00' => 'The Fool',
     '01' => 'The Magician',
     '02' => 'The High Priestess',
@@ -34,7 +44,7 @@ module Tarot
     '21' => 'The World'
   }
 
-  MINOR_ARCANA    = {
+  MINOR_ARCANA      = {
     '01' => :ace,
     '02' => :two,
     '03' => :three,
@@ -45,8 +55,8 @@ module Tarot
     '08' => :eight,
     '09' => :nine,
     '10' => :ten,
-    '11' => :page,
-    '12' => :knight,
+    '11' => :knight,
+    '12' => :prince,
     '13' => :queen,
     '14' => :king
   }
