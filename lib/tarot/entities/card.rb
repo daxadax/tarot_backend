@@ -7,7 +7,6 @@ module Tarot
       def initialize(arcana)
         ensure_valid_arcana!(arcana)
 
-
         @arcana           = arcana
         @associations     = []
         @card_orientation = determine_card_orientation
