@@ -28,6 +28,7 @@ class MajorArcanaSpec < EntitySpec
 
       assert_equal arcana,  card.arcana
       assert_equal title,   card.title
+      assert_equal [],      card.associations
       assert_equal id,      card.id
     end
   end

@@ -26,9 +26,10 @@ class MinorArcanaSpec < EntitySpec
     it "is successful with correct values" do
       assert_kind_of Entities::MinorArcana, card
 
-      assert_equal arcana,              card.arcana
+      assert_equal    arcana,           card.arcana
       assert_kind_of  Entities::Wands,  card.suit
-      assert_equal rank,                card.rank
+      assert_equal    rank,             card.rank
+      assert_equal    [],               card.associations
     end
   end
 
