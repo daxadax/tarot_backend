@@ -12,6 +12,10 @@ module Tarot
         @id           = id
       end
 
+      def display_name
+        title
+      end
+
       private
 
       def ensure_valid_input!(id)

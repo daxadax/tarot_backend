@@ -13,6 +13,10 @@ module Tarot
         @associations = build_associations
       end
 
+      def display_name
+        "#{rank.capitalize} of #{suit.name}"
+      end
+
       private
 
       def build_suit

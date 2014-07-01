@@ -33,4 +33,10 @@ class MajorArcanaSpec < EntitySpec
     end
   end
 
+  describe "display_name" do
+    it "returns the card's title" do
+      assert_equal title, card.display_name
+    end
+  end
+
 end

@@ -33,4 +33,10 @@ class MinorArcanaSpec < EntitySpec
     end
   end
 
+  describe "display_name" do
+    it "returns a formatted card title" do
+      assert_equal "Seven of Wands", card.display_name
+    end
+  end
+
 end
