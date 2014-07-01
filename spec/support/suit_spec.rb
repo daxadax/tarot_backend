@@ -4,13 +4,15 @@ class SuitSpec < Minitest::Spec
 
   let(:suit_name)             { suit.to_s.capitalize }
   let(:suit_class)            { Entities.const_get(suit_name) }
-  let(:default_associations)  { SUIT_ASSOCIATIONS[suit] }
+  let(:element)               { SUITS[suit].element }
+  let(:default_associations)  { SUITS[suit].associations }
 
   def assert_creation_of_suit(suit)
     result = suit_class.new
 
     assert_kind_of suit_class,          result
     assert_equal suit_name,             result.name
+    assert_equal element,               result.element
     assert_equal default_associations,  result.associations
   end
 

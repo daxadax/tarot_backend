@@ -1,10 +1,11 @@
 module Tarot
   module Entities
     class Suit < Entity
-      attr_reader :name, :associations
+      attr_reader :name, :element, :associations
 
       def initialize
         @name         = build_suit_name
+        @element      = suit_element
         @associations = Array.new(default_associations)
       end
 
@@ -16,12 +17,20 @@ module Tarot
 
       private
 
-      def default_associations
-        SUIT_ASSOCIATIONS[@name.downcase.to_sym]
-      end
-
       def build_suit_name
         (self.class.name.split('::').last)
+      end
+
+      def suit_element
+        suit_attributes.element
+      end
+
+      def default_associations
+        suit_attributes.associations
+      end
+
+      def suit_attributes
+        SUITS[@name.downcase.to_sym]
       end
 
       def ensure_valid_associations!(associations)

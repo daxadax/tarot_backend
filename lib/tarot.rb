@@ -7,16 +7,17 @@ require_relative "tarot/use_cases"
 
 module Tarot
   class CardAttributes < Struct.new(:title, :associations); end
+  class SuitAttributes < Struct.new(:element, :associations); end
 
   LAYOUTS           = {
     :enneagram => 9
   }
 
-  SUIT_ASSOCIATIONS = {
-    :wands      => %w[instinctual],
-    :pentacles  => %w[practical logistical],
-    :cups       => %w[emotional cultural social],
-    :swords     => %w[intellectual]
+  SUITS = {
+    :wands      => SuitAttributes.new(:fire,   ['yang', 'instinctual']),
+    :pentacles  => SuitAttributes.new(:earth,  ['practical', 'logistical']),
+    :cups       => SuitAttributes.new(:water,  ['yin', 'emotional', 'cultural', 'social']),
+    :swords     => SuitAttributes.new(:air,    ['intellectual'])
   }
 
   MAJOR_ARCANA      = {
@@ -45,8 +46,8 @@ module Tarot
   }
 
   MINOR_ARCANA      = {
-    '01' => CardAttributes.new( :ace,     [] ),
-    '02' => CardAttributes.new( :two,     [] ),
+    '01' => CardAttributes.new( :ace,     ['birth', 'creation', 'a gift', 'a surprise'] ),
+    '02' => CardAttributes.new( :two,     ['balance', 'unity', 'duality', 'conflict', 'tension'] ),
     '03' => CardAttributes.new( :three,   [] ),
     '04' => CardAttributes.new( :four,    [] ),
     '05' => CardAttributes.new( :five,    [] ),
@@ -55,8 +56,8 @@ module Tarot
     '08' => CardAttributes.new( :eight,   [] ),
     '09' => CardAttributes.new( :nine,    [] ),
     '10' => CardAttributes.new( :ten,     [] ),
-    '11' => CardAttributes.new( :knight,  ['instinctual', 'sub-conscious desire', 'behind-the-scenes', 'thirst for'] ),
-    '12' => CardAttributes.new( :prince,  ['routine', 'movement', 'training'] ),
+    '11' => CardAttributes.new( :prince,  ['routine', 'movement', 'training'] ),
+    '12' => CardAttributes.new( :knight,  ['instinctual', 'sub-conscious desire', 'behind-the-scenes', 'drive'] ),
     '13' => CardAttributes.new( :queen,   ['drawn attention', 'ambition', 'desire', 'deriving pleasure from'] ),
     '14' => CardAttributes.new( :king,    ['concentrated attention', 'synthesis', 'supervision' ] ),
   }
