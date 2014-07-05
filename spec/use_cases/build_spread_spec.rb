@@ -7,10 +7,24 @@ class BuildSpreadSpec < UseCaseSpec
   end
 
   describe "calling" do
-    let(:result) { spread.call }
+    let(:result)      { spread.call }
+    let(:stat_types) do
+      [:wands, :pentacles, :cups, :swords, :major]
+    end
+
+    it "returns attributes of the built spread" do
+      assert_predicate result, :cards
+      assert_predicate result, :stats
+    end
 
     it "returns the right number of cards for the used spread" do
-      assert_equal 9, result.size
+      assert_equal 9, result.cards.size
+    end
+
+    it "returns statistics about the dealt spread" do
+      stat_types.each do |stat|
+        assert_kind_of Integer, result.stats[stat]
+      end
     end
 
     describe "with an unknown spread" do
