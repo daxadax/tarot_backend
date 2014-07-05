@@ -5,25 +5,42 @@ module Tarot
     class CardCounter < Service
 
       def initialize(cards)
-        @cards = cards
+        @cards      = cards
+        @card_stats = Hash.new
       end
 
       def count
         OpenStruct.new(
-          :major        => count_cards(:major),
-          :wands        => count_cards(:wands),
-          :pentacles    => count_cards(:pentacles),
-          :cups         => count_cards(:cups),
-          :swords       => count_cards(:swords),
-          :court_cards  => count_cards(:court),
-          :reversed     => count_cards(:reversed)
+          :major        => count_for(:major),
+          :wands        => count_for(:wands),
+          :pentacles    => count_for(:pentacles),
+          :cups         => count_for(:cups),
+          :swords       => count_for(:swords),
+          :court_cards  => count_for(:court),
+          :reversed     => count_for(:reversed)
+        )
+      end
+
+      def average
+        OpenStruct.new(
+          :major        => average_for(:major),
+          :wands        => average_for(:wands),
+          :pentacles    => average_for(:pentacles),
+          :cups         => average_for(:cups),
+          :swords       => average_for(:swords),
+          :court_cards  => average_for(:court),
+          :reversed     => average_for(:reversed)
         )
       end
 
       private
 
-      def count_cards(type)
-        get_cards(type).count
+      def count_for(type)
+        card_stats(type).count
+      end
+
+      def average_for(type)
+        (count_for(type)/cards.count.to_f * 100).round
       end
 
       def get_cards(type)
@@ -55,6 +72,10 @@ module Tarot
         cards.select do |card|
           card.minor? && card.suit.name =~ /#{type}/i
         end
+      end
+
+      def card_stats(type)
+        @card_stats.fetch(type) { get_cards(type) }
       end
 
       def cards
