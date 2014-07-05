@@ -4,14 +4,24 @@ class DeckSpec < EntitySpec
   let(:deck) { Entities::Deck.new }
 
   describe "dealing" do
-    let(:result)      { deck.deal(9) }
-    let(:result_two)  { deck.deal(6) }
+    describe "without a given number of cards" do
+      let(:result) { deck.deal }
 
-    it "shuffles and deals a given number of cards" do
-      assert_equal 9, result.size
-      assert_equal 6, result_two.size
+      it "returns the whole deck" do
+        assert_equal 78, result.size
+      end
+    end
 
-      refute_same result, result_two
+    describe "with a given number of cards" do
+      let(:result)      { deck.deal(9) }
+      let(:result_two)  { deck.deal(6) }
+
+      it "shuffles and deals the given number of cards" do
+        assert_equal 9, result.size
+        assert_equal 6, result_two.size
+
+        refute_same result, result_two
+      end
     end
   end
 

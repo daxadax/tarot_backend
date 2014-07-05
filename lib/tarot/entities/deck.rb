@@ -7,10 +7,11 @@ module Tarot
         @cards  = []
       end
 
-      def deal(number)
+      def deal(number_of_cards = nil)
         build_new_deck
 
-        cards.shuffle.pop(number)
+        return cards.shuffle.pop(number_of_cards) if number_of_cards
+        cards
       end
 
       private
