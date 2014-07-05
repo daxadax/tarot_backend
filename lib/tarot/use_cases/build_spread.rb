@@ -2,14 +2,15 @@ module Tarot
   module UseCases
     class BuildSpread < UseCase
 
-      class Result < Struct.new(:cards, :stats);end
+      class Result < Struct.new(:cards, :count, :average);end
 
       def initialize(spread)
-        @used_spread = return_used_spread_or_raise_error!(spread)
+        @used_spread  = return_used_spread_or_raise_error!(spread)
+        @card_counter = card_counter
       end
 
       def call
-        Result.new( cards_for_spread, get_stats_for_cards )
+        Result.new( cards_for_spread, count_for_cards, avg_for_cards )
       end
 
       private
@@ -18,14 +19,26 @@ module Tarot
         @cards ||= get_cards_for_spread
       end
 
-      def get_stats_for_cards
-        Services::CardCounter.new(cards_for_spread).count
+      def count_for_cards
+        @count_for_cards ||= get_count_for_cards
+      end
+
+      def avg_for_cards
+        @avg_for_cards ||= get_avg_for_cards
       end
 
       def get_cards_for_spread
         number_of_cards = LAYOUTS[used_spread]
 
         Entities::Deck.new.deal(number_of_cards)
+      end
+
+      def get_count_for_cards
+        card_counter.count
+      end
+
+      def get_avg_for_cards
+        card_counter.average
       end
 
       def return_used_spread_or_raise_error!(spread)
@@ -43,6 +56,10 @@ module Tarot
 
       def used_spread
         @used_spread
+      end
+
+      def card_counter
+        @card_counter ||= Services::CardCounter.new(cards_for_spread)
       end
 
     end

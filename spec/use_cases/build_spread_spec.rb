@@ -14,7 +14,8 @@ class BuildSpreadSpec < UseCaseSpec
 
     it "returns attributes of the built spread" do
       assert_predicate result, :cards
-      assert_predicate result, :stats
+      assert_predicate result, :count
+      assert_predicate result, :average
     end
 
     it "returns the right number of cards for the used spread" do
@@ -23,12 +24,18 @@ class BuildSpreadSpec < UseCaseSpec
 
     it "returns statistics about the dealt spread" do
       stat_types.each do |stat|
-        assert_kind_of Integer, result.stats[stat]
+        assert_kind_of Integer, result.count.public_send(stat)
+        assert_kind_of Integer, result.average.public_send(stat)
       end
     end
 
-    it "returns the correct count for the dealt spread" do
-      assert_equal result.cards.select(&:major?).size, result.stats.major
+    it "returns the correct stats for the dealt spread" do
+      assert_equal result.cards.select(&:major?).size,  result.count.major
+      assert_equal expected_average,                    result.average.major
+    end
+
+    def expected_average
+      (result.count.major/result.cards.size.to_f * 100).round
     end
 
     describe "with an unknown spread" do
