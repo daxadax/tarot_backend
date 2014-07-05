@@ -11,6 +11,8 @@ class CardCounterSpec < ServiceSpec
     assert_equal 14, result.pentacles
     assert_equal 14, result.cups
     assert_equal 14, result.swords
+    assert_equal 16, result.court_cards
+    assert_kind_of Integer, result.reversed
   end
 
 end
