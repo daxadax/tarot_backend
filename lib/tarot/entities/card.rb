@@ -24,11 +24,21 @@ module Tarot
         @card_orientation == :reversed
       end
 
+      def court?
+        return false if major?
+        return false if minor? && !court_cards.include?(self.rank)
+        true
+      end
+
       private
 
       def determine_card_orientation
         return :reversed if rand > 0.5
         :upright
+      end
+
+      def court_cards
+        [:prince, :knight, :queen, :king]
       end
 
       def ensure_valid_arcana!(arcana)
