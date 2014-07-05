@@ -11,7 +11,8 @@ module Tarot
   class SuitAttributes < Struct.new(:element, :associations); end
 
   LAYOUTS           = {
-    :enneagram => 9
+    :three_card => 3,
+    :enneagram  => 9
   }
 
   SUITS = {
