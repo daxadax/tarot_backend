@@ -27,6 +27,10 @@ class BuildSpreadSpec < UseCaseSpec
       end
     end
 
+    it "returns the correct count for the dealt spread" do
+      assert_equal result.cards.select(&:major?).size, result.stats.major
+    end
+
     describe "with an unknown spread" do
       let(:used_spread) { :something_unknown }
 

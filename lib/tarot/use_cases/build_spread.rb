@@ -9,7 +9,7 @@ module Tarot
       end
 
       def call
-        Result.new( get_cards_for_spread, get_stats_for_cards )
+        Result.new( cards_for_spread, get_stats_for_cards )
       end
 
       private
