@@ -1,8 +1,16 @@
+require 'bound'
+
 module Tarot
   module UseCases
     class BuildSpread < UseCase
 
-      class Result < Struct.new(:cards, :count, :average);end
+      Card = Services::CardBoundary::Card
+
+      Result = Bound.required(
+        :count,
+        :average,
+        :cards => [Card]
+      )
 
       def initialize(spread)
         @used_spread  = return_used_spread_or_raise_error!(spread)
@@ -10,10 +18,20 @@ module Tarot
       end
 
       def call
-        Result.new( cards_for_spread, count_for_cards, avg_for_cards )
+        Result.new(
+          :cards    => build_cards,
+          :count    => count_for_cards,
+          :average  => avg_for_cards
+        )
       end
 
       private
+
+      def build_cards
+        cards_for_spread.map do |card|
+          card_boundary.for(card)
+        end
+      end
 
       def cards_for_spread
         @cards ||= get_cards_for_spread
@@ -60,6 +78,10 @@ module Tarot
 
       def card_counter
         @card_counter ||= Services::CardCounter.new(cards_for_spread)
+      end
+
+      def card_boundary
+        Services::CardBoundary.new
       end
 
     end

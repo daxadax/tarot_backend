@@ -30,8 +30,12 @@ class BuildSpreadSpec < UseCaseSpec
     end
 
     it "returns the correct stats for the dealt spread" do
-      assert_equal result.cards.select(&:major?).size,  result.count.major
-      assert_equal expected_average,                    result.average.major
+      assert_equal expected_size,     result.count.major
+      assert_equal expected_average,  result.average.major
+    end
+
+    def expected_size
+      result.cards.select(&:is_major).size
     end
 
     def expected_average
