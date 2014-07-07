@@ -5,22 +5,22 @@ class CupSpec < SuitSpec
   let(:suit) { :cups }
 
   describe "initialization" do
-    it "creates a new object with default associations for the given suit" do
+    it "creates a new object with default domains for the given suit" do
       assert_creation_of_suit(suit)
     end
   end
 
-  describe "adding new associations" do
-    let(:associations) do
+  describe "adding new domains" do
+    let(:domains) do
       ['fire', 'captain planet']
     end
 
     it "succeeds if given as an array" do
-      assert_new_associations_are_added(associations)
+      assert_new_domains_are_added(domains)
     end
 
     it "fails otherwise" do
-      refute_new_associations_are_added(associations.first)
+      refute_new_domains_are_added(domains.first)
     end
   end
 
