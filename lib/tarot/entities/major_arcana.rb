@@ -1,13 +1,15 @@
 module Tarot
   module Entities
     class MajorArcana < Card
-      attr_reader :title, :associations, :id
+      attr_reader :title, :element, :domain, :associations, :id
 
       def initialize(id)
         ensure_valid_input!(id)
         super(:major)
 
         @title        = MAJOR_ARCANA[id].title
+        @element      = MAJOR_ARCANA[id].element
+        @domain       = MAJOR_ARCANA[id].domain
         @associations = MAJOR_ARCANA[id].associations
         @id           = id
       end
