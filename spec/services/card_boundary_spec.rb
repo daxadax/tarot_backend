@@ -26,12 +26,12 @@ class CardBoundarySpec < ServiceSpec
 
   it "grants access to 'domain'" do
     assert_includes minor_result.domain, 'social'
-    assert_empty major_result.domain
+    assert_includes major_result.domain, 'social'
   end
 
   it "grants access to associations" do
     assert_includes minor_result.associations, 'desire'
-    assert_empty major_result.associations
+    assert_includes major_result.associations, 'amor fati'
   end
 
   it "grants access to 'suit'" do
