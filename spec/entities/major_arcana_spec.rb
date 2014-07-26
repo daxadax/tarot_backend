@@ -29,12 +29,12 @@ class MajorArcanaSpec < EntitySpec
     it "is successful with correct values" do
       assert_kind_of Entities::MajorArcana, card
 
-      assert_equal arcana,        card.arcana
-      assert_equal title,         card.title
-      assert_equal element,       card.element
-      assert_equal domain,        card.domain
-      assert_equal associations,  card.associations
-      assert_equal id,            card.id
+      assert_equal    arcana,             card.arcana
+      assert_equal    title,              card.title
+      assert_equal    element,            card.element
+      assert_includes card.domain,        'acting alone'
+      assert_includes card.associations,  'inner conviction'
+      assert_equal    id,                 card.id
     end
   end
 
