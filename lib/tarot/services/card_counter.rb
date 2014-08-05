@@ -46,26 +46,18 @@ module Tarot
       def get_cards(type)
         case type
         when :major
-          select_major_cards
+          select_cards(:major?)
         when :reversed
-          select_reversed_cards
+          select_cards(:reversed?)
         when :court
-          select_court_cards
+          select_cards(:court?)
         else
           select_minor_cards(type)
         end
       end
 
-      def select_major_cards
-        cards.select { |card| card.major? }
-      end
-
-      def select_reversed_cards
-        cards.select { |card| card.reversed? }
-      end
-
-      def select_court_cards
-        cards.select { |card| card.court? }
+      def select_cards(type)
+        cards.select { |card| card.public_send type }
       end
 
       def select_minor_cards(type)
