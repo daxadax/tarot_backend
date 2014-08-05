@@ -26,7 +26,7 @@ class CardBoundarySpec < ServiceSpec
 
   it "grants access to 'domain'" do
     assert_includes minor_result.domain, 'social'
-    assert_includes major_result.domain, 'social'
+    assert_includes major_result.domain, 'communication'
   end
 
   it "grants access to associations" do

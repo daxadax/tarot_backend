@@ -32,7 +32,7 @@ class MajorArcanaSpec < EntitySpec
       assert_equal    arcana,             card.arcana
       assert_equal    title,              card.title
       assert_equal    element,            card.element
-      assert_includes card.domain,        'acting alone'
+      assert_includes card.domain,        'social'
       assert_includes card.associations,  'inner conviction'
       assert_equal    id,                 card.id
     end

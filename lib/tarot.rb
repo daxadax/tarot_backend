@@ -11,6 +11,10 @@ module Tarot
   MinorAttributes   = Struct.new(:title, :associations)
   MajorAttributes   = Struct.new(:title, :element, :domain, :associations)
 
+  domain_for_fire_elements  = ['masculine', 'instinctual']
+  domain_for_earth_elements = ['practical', 'logistical', 'financial', 'transportation']
+  domain_for_water_elements = ['feminine', 'emotional', 'cultural', 'social']
+  domain_for_air_elements   = ['thought patterns', 'education and learning', 'communication']
 
   LAYOUTS           = {
     :three_card => 3,
@@ -18,10 +22,10 @@ module Tarot
   }
 
   SUITS = {
-    :wands      => SuitAttributes.new(:fire,   ['masculine', 'instinctual']),
-    :pentacles  => SuitAttributes.new(:earth,  ['practical', 'logistical', 'financial', 'transportation']),
-    :cups       => SuitAttributes.new(:water,  ['feminine', 'emotional', 'cultural', 'social']),
-    :swords     => SuitAttributes.new(:air,    ['thought patterns', 'education and learning', 'communication'])
+    :wands      => SuitAttributes.new(:fire,  domain_for_fire_elements),
+    :pentacles  => SuitAttributes.new(:earth, domain_for_earth_elements),
+    :cups       => SuitAttributes.new(:water, domain_for_water_elements),
+    :swords     => SuitAttributes.new(:air,   domain_for_air_elements)
   }
 
   MINOR_ARCANA      = {
@@ -53,7 +57,7 @@ module Tarot
       ['solitude', 'isolation', 'anticipation/anxiety', 'nearing completion']
     ),
     '10' => MinorAttributes.new( :ten,
-      []
+      ['finality', 'the end of a cycle']
     ),
     '11' => MinorAttributes.new( :prince,
       ['instinctual desire', 'sub-conscious', 'behind-the-scenes', 'drive']
@@ -70,93 +74,93 @@ module Tarot
   }
 
   MAJOR_ARCANA      = {
-    '00' => MajorAttributes.new( 'The Fool', :air,
-      ['cultural', 'social', 'instinctual'],
-      ['new beginnings', 'spontanaeity', 'joyful innocence', 'amor fati', 'unorthadox']
+    '00' => MajorAttributes.new( 'The Fool',
+      :air, domain_for_air_elements,
+      ['new beginnings', 'spontanaeity', 'ignorance', 'amor fati', 'unorthadox', 'forgotten power']
     ),
-    '01' => MajorAttributes.new( 'The Magician', :air,
-      ['masculine', 'active', 'creative'],
-      ['conscious action', 'acting with will', 'concentrated attention']
+    '01' => MajorAttributes.new( 'The Magician',
+      :air, domain_for_air_elements,
+      ['conscious action', 'acting with will', 'concentrated attention', 'creativity']
     ),
-    '02' => MajorAttributes.new( 'The High Priestess', :water,
-      ['passive', 'feminine'],
-      ['patience', 'discernment', 'balance']
+    '02' => MajorAttributes.new( 'The High Priestess',
+      :water, domain_for_water_elements,
+      ['patience', 'discernment', 'balance', 'guidance', 'passive action', 'sub-conscious']
     ),
-    '03' => MajorAttributes.new( 'The Empress', :earth,
-      [],
+    '03' => MajorAttributes.new( 'The Empress',
+      :earth, domain_for_earth_elements,
       ['point of no return', 'decisiveness']
     ),
-    '04' => MajorAttributes.new( 'The Emperor', :fire,
-      [],
+    '04' => MajorAttributes.new( 'The Emperor',
+      :fire, domain_for_fire_elements,
       ['stability']
     ),
-    '05' => MajorAttributes.new( 'The Hierophant', :earth,
-      ['roles and relationship', 'cultural', 'social', 'academic'],
-      ['education systems', 'heritage', 'discipline', 'doing what is expected', 'the Establishment', 'commitment to a cause', 'dominance/submission']
+    '05' => MajorAttributes.new( 'The Hierophant',
+      :earth, domain_for_earth_elements,
+      ['academia', 'heritage', 'discipline', 'doing what is expected', 'the Establishment', 'commitment to a cause', 'dominance/submission', 'roles']
     ),
-    '06' => MajorAttributes.new( 'The Lovers', :air,
-      ['roles and relationship', 'intellectual', 'physical'],
-      ['awareness', 'harmony', 'forming a union', 'physical attraction', 'making a connection', 'determining what you really care about']
+    '06' => MajorAttributes.new( 'The Lovers',
+      :air, domain_for_air_elements,
+      ['awareness', 'harmony', 'forming a union', 'physical attraction', 'making a connection', 'determining what you really care about', 'roles']
     ),
-    '07' => MajorAttributes.new( 'The Chariot', :water,
-      ['acting alone'],
-      ['inner conviction']
+    '07' => MajorAttributes.new( 'The Chariot',
+      :water, domain_for_water_elements,
+      ['inner conviction', 'acting alone']
     ),
-    '08' => MajorAttributes.new( 'Strength', :fire,
-      [],
+    '08' => MajorAttributes.new( 'Strength',
+      :fire, domain_for_fire_elements,
       ['recurrence', 'determination', 'purpose']
     ),
-    '09' => MajorAttributes.new( 'The Hermit', :earth,
-      ['society', 'intellectual', 'emotional', 'acting alone'],
-      ['instrospection', 'anticipation/anxiety', 'contemplation', 'end of a cycle', 'offering or seeking guidance', 'quitting old habits', 'withdraw from worldly affairs' ]
+    '09' => MajorAttributes.new( 'The Hermit',
+      :earth, domain_for_earth_elements,
+      ['instrospection', 'anticipation/anxiety', 'contemplation', 'end of a cycle', 'offering or seeking guidance', 'quitting old habits', 'withdraw from worldly affairs', 'acting alone']
     ),
-    '10' => MajorAttributes.new( 'The Wheel', :fire,
-      [],
-      []
+    '10' => MajorAttributes.new( 'The Wheel',
+      :fire, domain_for_fire_elements,
+      ['change', 'transition', 'finality','the end of a cycle', 'new beginnings']
     ),
-    '11' => MajorAttributes.new( 'Justice', :air,
-      [],
-      []
+    '11' => MajorAttributes.new( 'Justice',
+      :air, domain_for_air_elements,
+      ['awareness']
     ),
-    '12' => MajorAttributes.new( 'The Hanged Man', :water,
-      [],
-      ['patience']
+    '12' => MajorAttributes.new( 'The Hanged Man',
+      :water, domain_for_water_elements,
+      ['patience', 'passivity']
     ),
-    '13' => MajorAttributes.new( 'Death', :water,
-      [],
+    '13' => MajorAttributes.new( 'Death',
+      :water, domain_for_water_elements,
       ['point of no return', 'decisiveness']
     ),
-    '14' => MajorAttributes.new( 'Temperance', :fire,
-      [],
+    '14' => MajorAttributes.new( 'Temperance',
+      :fire, domain_for_fire_elements,
       ['stability']
     ),
-    '15' => MajorAttributes.new( 'The Devil', :earth,
-      [],
+    '15' => MajorAttributes.new( 'The Devil',
+      :earth, domain_for_earth_elements,
       ['dominance/submission', 'uncontrolled energy', 'change']
     ),
-    '16' => MajorAttributes.new( 'The Tower', :fire,
-      [],
+    '16' => MajorAttributes.new( 'The Tower',
+      :fire, domain_for_fire_elements,
       ['awareness', 'departure', ]
     ),
-    '17' => MajorAttributes.new( 'The Star', :air,
-      ['acting alone'],
-      []
+    '17' => MajorAttributes.new( 'The Star',
+      :air, domain_for_air_elements,
+      ['acting alone']
     ),
-    '18' => MajorAttributes.new( 'The Moon', :water,
-      ['cycles'],
-      ['recurrence', 'focus']
+    '18' => MajorAttributes.new( 'The Moon',
+      :water, domain_for_water_elements,
+      ['cycles', 'recurrence', 'focus']
     ),
-    '19' => MajorAttributes.new( 'The Sun', :fire,
-      ['acting alone'],
-      ['awareness', 'nearing completion']
+    '19' => MajorAttributes.new( 'The Sun',
+      :fire, domain_for_fire_elements,
+      ['acting alone', 'awareness', 'nearing completion']
     ),
-    '20' => MajorAttributes.new( 'Judgement', :fire,
-      [],
-      []
+    '20' => MajorAttributes.new( 'Judgement',
+      :fire, domain_for_fire_elements,
+      ['communication', 'cycles']
     ),
-    '21' => MajorAttributes.new( 'The World', :earth,
-      [],
-      []
+    '21' => MajorAttributes.new( 'The World',
+      :earth, domain_for_earth_elements,
+      ['appearances', 'essence', 'roles']
     )
   }
 
