@@ -33,15 +33,6 @@ module Tarot
         )
       end
 
-      def average_over_threshold(threshold)
-        card_averages = [
-          :major, :wands, :pentacles, :cups, :swords, :court, :reversed
-        ].map { |type| average_for type }
-
-        return true if card_averages.any? { |avg| avg > threshold}
-        false
-      end
-
       private
 
       def count_for(type)
