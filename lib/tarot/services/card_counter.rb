@@ -11,7 +11,7 @@ module Tarot
 
       def count
         OpenStruct.new(
-          :major        => count_for(:major),
+          :trumps       => count_for(:major),
           :wands        => count_for(:wands),
           :pentacles    => count_for(:pentacles),
           :cups         => count_for(:cups),
@@ -23,7 +23,7 @@ module Tarot
 
       def average
         OpenStruct.new(
-          :major        => average_for(:major),
+          :trumps       => average_for(:major),
           :wands        => average_for(:wands),
           :pentacles    => average_for(:pentacles),
           :cups         => average_for(:cups),

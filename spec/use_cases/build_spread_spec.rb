@@ -9,7 +9,7 @@ class BuildSpreadSpec < UseCaseSpec
   describe "calling" do
     let(:result)      { spread.call }
     let(:stat_types) do
-      [:wands, :pentacles, :cups, :swords, :major]
+      [:wands, :pentacles, :cups, :swords, :trumps]
     end
 
     it "returns attributes of the built spread" do
@@ -30,8 +30,8 @@ class BuildSpreadSpec < UseCaseSpec
     end
 
     it "returns the correct stats for the dealt spread" do
-      assert_equal expected_size,     result.count.major
-      assert_equal expected_average,  result.average.major
+      assert_equal expected_size,     result.count.trumps
+      assert_equal expected_average,  result.average.trumps
     end
 
     def expected_size
@@ -39,7 +39,7 @@ class BuildSpreadSpec < UseCaseSpec
     end
 
     def expected_average
-      (result.count.major/result.cards.size.to_f * 100).round
+      (result.count.trumps/result.cards.size.to_f * 100).round
     end
 
     describe "with an unknown spread" do

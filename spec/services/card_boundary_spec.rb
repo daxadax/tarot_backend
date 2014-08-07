@@ -35,8 +35,8 @@ class CardBoundarySpec < ServiceSpec
   end
 
   it "grants access to 'suit'" do
-    assert_equal 'Cups',  minor_result.suit
-    assert_equal 'Trump', major_result.suit
+    assert_equal 'Cups',    minor_result.suit
+    assert_equal 'Trumps',  major_result.suit
   end
 
   it "grants access to 'element'" do

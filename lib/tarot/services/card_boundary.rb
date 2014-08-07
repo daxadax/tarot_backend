@@ -51,7 +51,7 @@ module Tarot
       end
 
       def determine_suit(card)
-        return 'Trump' if card.major?
+        return 'Trumps' if card.major?
         card.suit.name
       end
 
