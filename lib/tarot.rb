@@ -16,7 +16,7 @@ module Tarot
   domain_for_water_elements = ['feminine', 'emotional', 'cultural', 'social']
   domain_for_air_elements   = ['thought patterns', 'education and learning', 'communication']
 
-  LAYOUTS           = {
+  SPREADS          = {
     :three_card => 3,
     :enneagram  => 9
   }

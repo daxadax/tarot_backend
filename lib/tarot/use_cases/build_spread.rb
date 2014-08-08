@@ -46,7 +46,7 @@ module Tarot
       end
 
       def get_cards_for_spread
-        number_of_cards = LAYOUTS[used_spread]
+        number_of_cards = SPREADS[used_spread]
 
         Entities::Deck.new.deal(number_of_cards)
       end
@@ -66,7 +66,7 @@ module Tarot
       end
 
       def ensure_available_spread!(spread)
-        unless LAYOUTS.keys.include?(spread)
+        unless SPREADS.keys.include?(spread)
           reason = "#{spread} is not an available spread"
           raise_argument_error(reason, spread)
         end
