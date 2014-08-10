@@ -2,7 +2,7 @@ require 'bound'
 
 module Tarot
   module UseCases
-    class BuildSpread < UseCase
+    class DealForSpread< UseCase
 
       Card = Services::CardBoundary::Card
 

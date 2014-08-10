@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-class BuildSpreadSpec < UseCaseSpec
+class DealForSpreadSpec < UseCaseSpec
   let(:used_spread) { :enneagram }
   let(:spread) do
-    UseCases::BuildSpread.new(used_spread)
+    UseCases::DealForSpread.new(used_spread)
   end
 
   describe "calling" do
