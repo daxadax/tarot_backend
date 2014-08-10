@@ -46,7 +46,7 @@ module Tarot
       end
 
       def get_cards_for_spread
-        number_of_cards = SPREADS[used_spread]
+        number_of_cards = get_number_of_cards_to_deal
 
         Entities::Deck.new.deal(number_of_cards)
       end
@@ -59,6 +59,11 @@ module Tarot
         card_counter.average
       end
 
+      def get_number_of_cards_to_deal
+        return nil if used_spread == :all
+        SPREADS[used_spread]
+      end
+
       def return_used_spread_or_raise_error!(spread)
         ensure_available_spread!(spread)
 
@@ -66,7 +71,9 @@ module Tarot
       end
 
       def ensure_available_spread!(spread)
-        unless SPREADS.keys.include?(spread)
+        available_spreads = SPREADS.keys + [:all]
+
+        unless available_spreads.include?(spread)
           reason = "#{spread} is not an available spread"
           raise_argument_error(reason, spread)
         end

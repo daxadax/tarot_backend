@@ -12,6 +12,14 @@ class DealForSpreadSpec < UseCaseSpec
       [:wands, :pentacles, :cups, :swords, :trumps]
     end
 
+    describe "with input == :all" do
+      let(:used_spread) { :all }
+
+      it "returns the full deck" do
+        assert_equal 78, result.cards.size
+      end
+    end
+
     it "returns attributes of the built spread" do
       assert_predicate result, :cards
       assert_predicate result, :count
