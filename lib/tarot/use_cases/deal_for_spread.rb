@@ -6,14 +6,22 @@ module Tarot
 
       Card = Services::CardBoundary::Card
 
+      Input = Bound.required(
+        :used_spread
+      ).optional(
+        :cards
+      )
+
       Result = Bound.required(
         :count,
         :average,
         :cards => [Card]
       )
 
-      def initialize(spread)
-        @used_spread  = return_used_spread_or_raise_error!(spread)
+      def initialize(input)
+        input = Input.new(input)
+        @used_spread  = return_used_spread_or_raise_error!(input.used_spread)
+        @preset_cards = input.cards || []
         @card_counter = card_counter
       end
 
@@ -48,7 +56,12 @@ module Tarot
       def get_cards_for_spread
         number_of_cards = get_number_of_cards_to_deal
 
+        return deal_preset_cards(number_of_cards) if cards_specified?
         Entities::Deck.new.deal(number_of_cards)
+      end
+
+      def deal_preset_cards(number_of_cards)
+        Entities::Deck.new(preset_cards).deal(number_of_cards)
       end
 
       def get_count_for_cards
@@ -77,6 +90,14 @@ module Tarot
           reason = "#{spread} is not an available spread"
           raise_argument_error(reason, spread)
         end
+      end
+
+      def cards_specified?
+        @preset_cards.any?
+      end
+
+      def preset_cards
+        @preset_cards
       end
 
       def used_spread

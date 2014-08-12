@@ -1,9 +1,16 @@
 require 'spec_helper'
 
 class DealForSpreadSpec < UseCaseSpec
-  let(:used_spread) { :enneagram }
+  let(:used_spread) {:three_card}
+  let(:cards)       { nil }
+
   let(:spread) do
-    UseCases::DealForSpread.new(used_spread)
+    input = {
+      :used_spread => used_spread,
+      :cards       => cards
+    }
+
+    UseCases::DealForSpread.new(input)
   end
 
   describe "calling" do
@@ -27,7 +34,7 @@ class DealForSpreadSpec < UseCaseSpec
     end
 
     it "returns the right number of cards for the used spread" do
-      assert_equal 9, result.cards.size
+      assert_equal 3, result.cards.size
     end
 
     it "returns statistics about the dealt spread" do
@@ -55,6 +62,15 @@ class DealForSpreadSpec < UseCaseSpec
 
       it "fails" do
         assert_failure {result}
+      end
+    end
+
+    describe "with cards pre-specified" do
+      let(:cards) { %w[w_03 c_10 00] }
+
+      it "returns those cards" do
+        assert_equal 3,     result.cards.size
+        assert_equal cards, result.cards.map(&:id)
       end
     end
   end
