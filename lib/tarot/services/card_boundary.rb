@@ -26,17 +26,17 @@ module Tarot
 
       def build_boundary(card)
         Card.new(
-          :id             => card.id,
-          :arcana         => card.arcana,
-          :display_name   => card.display_name,
-          :element        => determine_element(card),
-          :domain         => determine_domain(card),
-          :associations   => card.associations,
-          :suit           => determine_suit(card),
-          :is_minor       => card.minor?,
-          :is_major       => card.major?,
-          :is_reversed    => card.reversed?,
-          :is_court_card  => card.court?
+          :id => card.id,
+          :arcana => card.arcana,
+          :display_name => card.display_name,
+          :element => determine_element(card),
+          :domain => determine_domain(card),
+          :associations => card.associations,
+          :suit => determine_suit(card),
+          :is_minor => card.minor?,
+          :is_major => card.major?,
+          :is_reversed => card.reversed?,
+          :is_court_card => card.court?
         )
       end
 

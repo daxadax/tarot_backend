@@ -7,25 +7,20 @@ require_relative 'tarot/services'
 require_relative 'tarot/use_cases'
 
 module Tarot
-  SuitAttributes    = Struct.new(:element, :domain)
-  MinorAttributes   = Struct.new(:title, :associations)
-  MajorAttributes   = Struct.new(:title, :element, :domain, :associations)
+  SuitAttributes = Struct.new(:element, :domain)
+  MinorAttributes = Struct.new(:title, :associations)
+  MajorAttributes = Struct.new(:title, :element, :domain, :associations)
 
   domain_for_fire_elements  = ['masculine', 'instinctual']
   domain_for_earth_elements = ['practical', 'logistical', 'financial', 'transportation']
   domain_for_water_elements = ['feminine', 'emotional', 'cultural', 'social']
   domain_for_air_elements   = ['thought patterns', 'education and learning', 'communication']
 
-  SPREADS          = {
-    :three_card => 3,
-    :enneagram  => 9
-  }
-
   SUITS = {
-    :wands      => SuitAttributes.new(:fire,  domain_for_fire_elements),
-    :pentacles  => SuitAttributes.new(:earth, domain_for_earth_elements),
-    :cups       => SuitAttributes.new(:water, domain_for_water_elements),
-    :swords     => SuitAttributes.new(:air,   domain_for_air_elements)
+    :wands => SuitAttributes.new(:fire,  domain_for_fire_elements),
+    :pentacles => SuitAttributes.new(:earth, domain_for_earth_elements),
+    :cups => SuitAttributes.new(:water, domain_for_water_elements),
+    :swords => SuitAttributes.new(:air,   domain_for_air_elements)
   }
 
   MINOR_ARCANA      = {
