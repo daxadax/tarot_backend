@@ -70,7 +70,7 @@ class DealForSpreadSpec < UseCaseSpec
 
       it "returns those cards" do
         assert_equal 3,     result.cards.size
-        assert_equal cards, result.cards.map(&:id)
+        assert_equal cards.sort, result.cards.map(&:id).sort
       end
     end
   end

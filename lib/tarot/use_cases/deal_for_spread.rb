@@ -22,7 +22,6 @@ module Tarot
         input = Input.new(input)
         @used_spread  = return_used_spread_or_raise_error!(input.used_spread)
         @preset_cards = input.cards || []
-        @card_counter = card_counter
       end
 
       def call
