@@ -2,13 +2,12 @@ require 'bound'
 
 module Tarot
   module UseCases
-    class DealForSpread< UseCase
+    class GetCards < UseCase
 
       Card = Services::CardBoundary::Card
 
-      Input = Bound.required(
-        :used_spread
-      ).optional(
+      Input = Bound.optional(
+        :quantity,
         :cards
       )
 
@@ -20,7 +19,7 @@ module Tarot
 
       def initialize(input)
         input = Input.new(input)
-        @used_spread  = return_used_spread_or_raise_error!(input.used_spread)
+        @quantity = input.quantity
         @preset_cards = input.cards || []
       end
 
@@ -53,14 +52,8 @@ module Tarot
       end
 
       def get_cards_for_spread
-        number_of_cards = get_number_of_cards_to_deal
-
-        return deal_preset_cards(number_of_cards) if cards_specified?
-        Entities::Deck.new.deal(number_of_cards)
-      end
-
-      def deal_preset_cards(number_of_cards)
-        Entities::Deck.new(preset_cards).deal(number_of_cards)
+        return Entities::Deck.new(preset_cards).deal if cards_specified?
+        Entities::Deck.new.deal(quantity)
       end
 
       def get_count_for_cards
@@ -71,26 +64,6 @@ module Tarot
         card_counter.average
       end
 
-      def get_number_of_cards_to_deal
-        return nil if used_spread == :all
-        SPREADS[used_spread]
-      end
-
-      def return_used_spread_or_raise_error!(spread)
-        ensure_available_spread!(spread)
-
-        spread
-      end
-
-      def ensure_available_spread!(spread)
-        available_spreads = SPREADS.keys + [:all]
-
-        unless available_spreads.include?(spread)
-          reason = "#{spread} is not an available spread"
-          raise_argument_error(reason, spread)
-        end
-      end
-
       def cards_specified?
         @preset_cards.any?
       end
@@ -99,8 +72,8 @@ module Tarot
         @preset_cards
       end
 
-      def used_spread
-        @used_spread
+      def quantity
+        @quantity
       end
 
       def card_counter

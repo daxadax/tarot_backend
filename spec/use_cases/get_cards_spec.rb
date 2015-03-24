@@ -1,26 +1,26 @@
 require 'spec_helper'
 
-class DealForSpreadSpec < UseCaseSpec
-  let(:used_spread) {:three_card}
-  let(:cards)       { nil }
+class GetCardsSpec < UseCaseSpec
+  let(:quantity) { 3 }
+  let(:cards) { nil }
 
   let(:spread) do
     input = {
-      :used_spread => used_spread,
-      :cards       => cards
+      :quantity => quantity,
+      :cards => cards
     }
 
-    UseCases::DealForSpread.new(input)
+    UseCases::GetCards.new(input)
   end
 
   describe "calling" do
-    let(:result)      { spread.call }
+    let(:result) { spread.call }
     let(:stat_types) do
       [:wands, :pentacles, :cups, :swords, :trumps]
     end
 
-    describe "with input == :all" do
-      let(:used_spread) { :all }
+    describe "with no input" do
+      let(:quantity) { nil }
 
       it "returns the full deck" do
         assert_equal 78, result.cards.size
@@ -45,8 +45,8 @@ class DealForSpreadSpec < UseCaseSpec
     end
 
     it "returns the correct stats for the dealt spread" do
-      assert_equal expected_size,     result.count.trumps
-      assert_equal expected_average,  result.average.trumps
+      assert_equal expected_size, result.count.trumps
+      assert_equal expected_average, result.average.trumps
     end
 
     def expected_size
@@ -57,19 +57,11 @@ class DealForSpreadSpec < UseCaseSpec
       (result.count.trumps/result.cards.size.to_f * 100).round
     end
 
-    describe "with an unknown spread" do
-      let(:used_spread) { :something_unknown }
-
-      it "fails" do
-        assert_failure {result}
-      end
-    end
-
     describe "with cards pre-specified" do
       let(:cards) { %w[w_03 c_10 00] }
 
       it "returns those cards" do
-        assert_equal 3,     result.cards.size
+        assert_equal 3, result.cards.size
         assert_equal cards.sort, result.cards.map(&:id).sort
       end
     end
