@@ -17,9 +17,7 @@ module Tarot
       private
 
       def build_deck_from(cards)
-        cards.map do |id|
-          build_card id
-        end
+        cards.map { |id| build_card(id) }
       end
 
       def build_new_deck
@@ -53,10 +51,6 @@ module Tarot
       def set_value_of(cards)
         return build_deck_from(cards) unless cards.nil?
         []
-      end
-
-      def suits
-        %w[w p c s]
       end
 
     end
