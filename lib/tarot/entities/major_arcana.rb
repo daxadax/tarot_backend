@@ -16,8 +16,8 @@ module Tarot
         @id = id
         @title = self.class.title_mapping[id]
         @element = determine_element(id)
-        @domain = Tarot::Associations.new.elemental(element)
-        @associations = Tarot::Associations.new.general(:major, id)
+        @domain = association_factory.elemental(element)
+        @associations = association_factory.general(:major, id)
       end
 
       def display_name

@@ -45,7 +45,7 @@ module Tarot
       end
 
       def build_associations
-        Tarot::Associations.new.general(:minor, rank_reference)
+        association_factory.general(:minor, rank_reference)
       end
 
       def suit_reference

@@ -1,5 +1,5 @@
 module Tarot
-  class Associations
+  class AssociationFactory
 
     def elemental(element)
       elemental_associations[element]
