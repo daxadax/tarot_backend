@@ -3,13 +3,21 @@ module Tarot
     class MinorArcana < Card
       attr_reader :id, :suit, :rank, :associations
 
+      def self.build_all
+        %w[w p c s].flat_map do |suit|
+          rank_mapping.keys.map do |id|
+            self.new("#{suit}_#{id}")
+          end
+        end
+      end
+
       def initialize(id)
         ensure_valid_input!(id)
         super(:minor)
 
-        @id           = id
-        @suit         = build_suit
-        @rank         = build_rank
+        @id = id
+        @suit = build_suit
+        @rank = build_rank
         @associations = build_associations
       end
 
@@ -33,19 +41,19 @@ module Tarot
       end
 
       def build_rank
-        MINOR_ARCANA[rank_reference].title
+        self.class.rank_mapping[rank_reference]
       end
 
       def build_associations
-        MINOR_ARCANA[rank_reference].associations
+        Tarot::Associations.new.general(:minor, rank_reference)
       end
 
       def suit_reference
-        @id.split('_').first
+        @suit_reference ||= id.split('_').first
       end
 
       def rank_reference
-        @id.split('_').last
+        @rank_reference ||= id.split('_').last
       end
 
       def ensure_valid_input!(id)
@@ -79,7 +87,26 @@ module Tarot
       end
 
       def valid_ranks
-        MINOR_ARCANA.keys
+        self.class.rank_mapping.keys
+      end
+
+      def self.rank_mapping
+        {
+          '01' => :ace,
+          '02' => :two,
+          '03' => :three,
+          '04' => :four,
+          '05' => :five,
+          '06' => :six,
+          '07' => :seven,
+          '08' => :eight,
+          '09' => :nine,
+          '10' => :ten,
+          '11' => :page,
+          '12' => :knight,
+          '13' => :queen,
+          '14' => :king
+        }
       end
 
     end

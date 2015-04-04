@@ -5,31 +5,31 @@ module Tarot
     class CardCounter < Service
 
       def initialize(cards)
-        @cards      = cards
+        @cards = cards
         @card_stats = Hash.new
       end
 
       def count
         OpenStruct.new(
-          :trumps       => count_for(:major),
-          :wands        => count_for(:wands),
-          :pentacles    => count_for(:pentacles),
-          :cups         => count_for(:cups),
-          :swords       => count_for(:swords),
-          :court_cards  => count_for(:court),
-          :reversed     => count_for(:reversed)
+          :trumps => count_for(:major),
+          :wands => count_for(:wands),
+          :pentacles => count_for(:pentacles),
+          :cups => count_for(:cups),
+          :swords => count_for(:swords),
+          :court_cards => count_for(:court),
+          :reversed => count_for(:reversed)
         )
       end
 
       def average
         OpenStruct.new(
-          :trumps       => average_for(:major),
-          :wands        => average_for(:wands),
-          :pentacles    => average_for(:pentacles),
-          :cups         => average_for(:cups),
-          :swords       => average_for(:swords),
-          :court_cards  => average_for(:court),
-          :reversed     => average_for(:reversed)
+          :trumps => average_for(:major),
+          :wands => average_for(:wands),
+          :pentacles => average_for(:pentacles),
+          :cups => average_for(:cups),
+          :swords => average_for(:swords),
+          :court_cards => average_for(:court),
+          :reversed => average_for(:reversed)
         )
       end
 

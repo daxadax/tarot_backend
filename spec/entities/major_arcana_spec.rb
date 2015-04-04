@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 class MajorArcanaSpec < EntitySpec
-  let(:title)         { 'The Chariot' }
-  let(:arcana)        { :major }
-  let(:id)            { '07' }
-  let(:element)       { :water }
-  let(:domain)        { [] }
-  let(:associations)  { [] }
-  let(:card)          { Entities::MajorArcana.new(id) }
+  let(:title) { 'The Chariot' }
+  let(:arcana) { :major }
+  let(:id) { '07' }
+  let(:element) { :water }
+  let(:domain) { [] }
+  let(:associations) { [] }
+  let(:card) { Entities::MajorArcana.new(id) }
 
   describe "creation" do
     describe "without" do
@@ -28,13 +28,13 @@ class MajorArcanaSpec < EntitySpec
 
     it "is successful with correct values" do
       assert_kind_of Entities::MajorArcana, card
-
-      assert_equal    arcana,             card.arcana
-      assert_equal    title,              card.title
-      assert_equal    element,            card.element
-      assert_includes card.domain,        'social'
-      assert_includes card.associations,  'inner conviction'
-      assert_equal    id,                 card.id
+      
+      assert_equal arcana, card.arcana
+      assert_equal title, card.title
+      assert_equal element, card.element
+      assert_includes card.domain, 'social'
+      assert_includes card.associations, 'inner conviction'
+      assert_equal id, card.id
     end
   end
 

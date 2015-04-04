@@ -30,16 +30,14 @@ module Tarot
       end
 
       def build_all_minor_arcana
-        suits.each do |suit|
-          MINOR_ARCANA.keys.each do |rank|
-            cards << build_card("#{suit}_#{rank}")
-          end
+        Entities::MinorArcana.build_all.each do |card|
+          cards << card
         end
       end
 
       def build_all_major_arcana
-        MAJOR_ARCANA.keys.each do |id|
-          cards << build_card(id)
+        Entities::MajorArcana.build_all.each do |card|
+          cards << card
         end
       end
 

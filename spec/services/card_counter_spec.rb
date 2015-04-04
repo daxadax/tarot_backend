@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 class CardCounterSpec < ServiceSpec
-  let(:cards)         { Entities::Deck.new.deal }
-  let(:card_counter)  { Services::CardCounter.new(cards) }
+  let(:cards) { Entities::Deck.new.deal }
+  let(:card_counter) { Services::CardCounter.new(cards) }
 
   describe "count" do
-    let(:result)        { card_counter.count }
+    let(:result) { card_counter.count }
 
     it "returns stats about the given cards" do
       assert_equal 22, result.trumps
