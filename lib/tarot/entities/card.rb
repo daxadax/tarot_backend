@@ -37,7 +37,7 @@ module Tarot
       end
 
       def court_cards
-        [:page, :knight, :queen, :king]
+        %w[11 12 13 14]
       end
 
       def ensure_valid_arcana!(arcana)

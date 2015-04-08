@@ -17,12 +17,12 @@ module Tarot
 
         @id = id
         @suit = build_suit
-        @rank = build_rank
-        @associations = build_associations
+        @rank = rank_reference
+        @associations = association_factory.build(self)
       end
 
       def display_name
-        "#{rank.capitalize} of #{suit.name}"
+        "#{named_rank.capitalize} of #{suit.name}"
       end
 
       private
@@ -40,12 +40,8 @@ module Tarot
         end
       end
 
-      def build_rank
+      def named_rank
         self.class.rank_mapping[rank_reference]
-      end
-
-      def build_associations
-        association_factory.general(:minor, rank_reference)
       end
 
       def suit_reference

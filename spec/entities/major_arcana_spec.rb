@@ -5,15 +5,12 @@ class MajorArcanaSpec < EntitySpec
   let(:arcana) { :major }
   let(:id) { '07' }
   let(:element) { :water }
-  let(:domain) { [] }
-  let(:associations) { [] }
   let(:card) { Entities::MajorArcana.new(id) }
 
   describe "creation" do
     describe "without" do
       describe "id" do
         let(:id) { nil }
-
         it('fails') { assert_failure {card} }
       end
     end
@@ -21,20 +18,22 @@ class MajorArcanaSpec < EntitySpec
     describe "with wrong values" do
       describe "id" do
         let(:id)    { :seven }
-
         it('fails') { assert_failure {card} }
       end
     end
 
     it "is successful with correct values" do
       assert_kind_of Entities::MajorArcana, card
-      
+
+      assert_equal id, card.id
       assert_equal arcana, card.arcana
       assert_equal title, card.title
       assert_equal element, card.element
       assert_includes card.domain, 'social'
-      assert_includes card.associations, 'inner conviction'
-      assert_equal id, card.id
+
+      associations = card.associations
+      assert_includes associations.general, 'inner conviction'
+      assert_includes associations.golden_dawn, 'speech'
     end
   end
 

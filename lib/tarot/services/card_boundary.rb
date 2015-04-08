@@ -4,18 +4,23 @@ module Tarot
   module Services
     class CardBoundary < Service
 
+      Associations = Bound.required(
+        :general,
+        :golden_dawn
+      )
+
       Card = Bound.required(
         :id,
         :arcana,
         :display_name,
         :element,
         :domain,
-        :associations,
         :suit,
         :is_minor,
         :is_major,
         :is_reversed,
-        :is_court_card
+        :is_court_card,
+        :associations => Associations
       )
 
       def for(card)
@@ -31,12 +36,19 @@ module Tarot
           :display_name => card.display_name,
           :element => determine_element(card),
           :domain => determine_domain(card),
-          :associations => card.associations,
           :suit => determine_suit(card),
           :is_minor => card.minor?,
           :is_major => card.major?,
           :is_reversed => card.reversed?,
-          :is_court_card => card.court?
+          :is_court_card => card.court?,
+          :associations => build_associations(card.associations),
+        )
+      end
+
+      def build_associations(associations)
+        Associations.new(
+          :general => associations.general,
+          :golden_dawn => associations.golden_dawn
         )
       end
 

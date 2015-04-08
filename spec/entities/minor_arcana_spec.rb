@@ -1,16 +1,15 @@
 require 'spec_helper'
 
 class MinorArcanaSpec < EntitySpec
-  let(:arcana)  { :minor }
-  let(:id)      { 'w_07'}
-  let(:rank)    { :seven }
-  let(:card)    { Entities::MinorArcana.new(id) }
+  let(:arcana) { :minor }
+  let(:id) { 'w_07'}
+  let(:rank) { '07' }
+  let(:card) { Entities::MinorArcana.new(id) }
 
   describe "creation" do
     describe "without" do
       describe "id" do
         let(:id) { '' }
-
         it('fails') { assert_failure {card} }
       end
     end
@@ -18,7 +17,6 @@ class MinorArcanaSpec < EntitySpec
     describe "with wrong values" do
       describe "id" do
         let(:id) { '07_w' }
-
         it('fails') { assert_failure {card} }
       end
     end
@@ -26,10 +24,13 @@ class MinorArcanaSpec < EntitySpec
     it "is successful with correct values" do
       assert_kind_of Entities::MinorArcana, card
 
-      assert_equal    arcana,             card.arcana
-      assert_kind_of  Entities::Wands,    card.suit
-      assert_equal    rank,               card.rank
-      assert_includes card.associations,  'acting alone'
+      assert_equal arcana, card.arcana
+      assert_kind_of Entities::Wands, card.suit
+      assert_equal rank, card.rank
+
+      associations = card.associations
+      assert_includes associations.general, 'acting alone'
+      assert_equal 'Valour', associations.golden_dawn
     end
   end
 
