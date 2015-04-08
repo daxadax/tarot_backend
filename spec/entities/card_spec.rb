@@ -41,22 +41,14 @@ class CardSpec < EntitySpec
   end
 
   describe "court?" do
-    let(:major_card)      { Entities::MajorArcana.new('01') }
-    let(:non_count_card)  { Entities::MinorArcana.new('w_02') }
-    let(:court_card)      { Entities::MinorArcana.new('p_13') }
+    let(:major_card) { Entities::MajorArcana.new('01') }
+    let(:non_count_card) { Entities::MinorArcana.new('w_02') }
+    let(:court_card) { Entities::MinorArcana.new('p_13') }
 
     it "determines if the card is a court card" do
       assert_equal false, major_card.court?
       assert_equal false, non_count_card.court?
-      assert_equal true,  court_card.court?
-    end
-  end
-
-  describe "associations" do
-    it "can build associations after creations" do
-      assert_empty card.associations
-      card.associations << "some meaning"
-      assert_equal "some meaning", card.associations.first
+      assert_equal true, court_card.court?
     end
   end
 end

@@ -8,7 +8,6 @@ module Tarot
         ensure_valid_arcana!(arcana)
 
         @arcana = arcana
-        @associations = []
         @card_orientation = determine_card_orientation
       end
 

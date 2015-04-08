@@ -9,11 +9,6 @@ module Tarot
         @domain = association_factory.elemental(element)
       end
 
-      def add_domain(new_domain)
-        ensure_valid_domain!(new_domain)
-        new_domain.each { |a| @domain << a }
-      end
-
       private
 
       def build_suit_name
