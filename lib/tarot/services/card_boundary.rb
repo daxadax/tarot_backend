@@ -3,7 +3,7 @@ require 'bound'
 module Tarot
   module Services
     class CardBoundary < Service
-
+      
       Associations = Bound.required(
         :general,
         :golden_dawn
