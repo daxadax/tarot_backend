@@ -3,11 +3,13 @@ require 'spec_helper'
 class GetCardsSpec < UseCaseSpec
   let(:quantity) { 3 }
   let(:cards) { nil }
+  let(:time_of_reading) { nil }
 
   let(:spread) do
     input = {
       :quantity => quantity,
-      :cards => cards
+      :cards => cards,
+      :time_of_reading => time_of_reading
     }
 
     UseCases::GetCards.new(input)
@@ -31,6 +33,7 @@ class GetCardsSpec < UseCaseSpec
       assert_predicate result, :cards
       assert_predicate result, :count
       assert_predicate result, :average
+      assert_predicate result, :moon
     end
 
     it "returns the right number of cards for the used spread" do
@@ -47,6 +50,18 @@ class GetCardsSpec < UseCaseSpec
     it "returns the correct stats for the dealt spread" do
       assert_equal expected_size, result.count.trumps
       assert_equal expected_average, result.average.trumps
+    end
+
+    describe 'moon' do
+      let(:time_of_reading) { Time.utc(2015,4,5) }
+
+      it 'returns information about the current lunar cycle' do
+        assert_equal 15.36, result.moon.age
+        assert_equal 0.97, result.moon.illumination
+        assert_equal :full, result.moon.phase
+        assert_equal false, result.moon.is_waxing
+        assert_equal true, result.moon.is_waning
+      end
     end
 
     def expected_size
