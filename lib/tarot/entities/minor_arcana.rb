@@ -30,6 +30,10 @@ module Tarot
         false
       end
 
+      def astrological_sign
+        astrological_signs[suit.element][rank]
+      end
+
       private
 
       def court_cards
@@ -89,6 +93,31 @@ module Tarot
 
       def valid_ranks
         self.class.rank_mapping.keys
+      end
+
+      def astrological_signs
+        {
+          :fire => {
+            '12' => :leo,
+            '13' => :aries,
+            '14' => :sagittarius
+          },
+          :earth => {
+            '12' => :taurus,
+            '13' => :capricorn,
+            '14' => :virgo
+          },
+          :water => {
+            '12' => :scorpio,
+            '13' => :cancer,
+            '14' => :pisces
+          },
+          :air => {
+            '12' => :aquarius,
+            '13' => :libra,
+            '14' => :gemini
+          }
+        }
       end
 
       def self.rank_mapping

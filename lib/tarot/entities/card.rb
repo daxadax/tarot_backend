@@ -23,6 +23,10 @@ module Tarot
         @card_orientation == :reversed
       end
 
+      def astrological_sign
+        nil
+      end
+
       private
 
       def determine_card_orientation
