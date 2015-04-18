@@ -31,6 +31,7 @@ module Tarot
       private
 
       def determine_element(id)
+        # bill heidrick
         return :fire if %w[04 08 10 14 16 19 20].include? id
         return :earth if %w[03 05 09 15 21].include? id
         return :water if %w[02 07 12 13 18].include? id
