@@ -30,7 +30,7 @@ class MinorArcanaSpec < EntitySpec
 
       associations = card.associations
       assert_includes associations.general, 'acting alone'
-      assert_equal 'Valour', associations.golden_dawn
+      assert_includes associations.golden_dawn, 'valour'
     end
   end
 
