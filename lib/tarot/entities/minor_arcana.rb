@@ -25,7 +25,16 @@ module Tarot
         "#{named_rank.capitalize} of #{suit.name}"
       end
 
+      def court?
+        return true if court_cards.include?(self.rank)
+        false
+      end
+
       private
+
+      def court_cards
+        %w[11 12 13 14]
+      end
 
       def build_suit
         case suit_reference

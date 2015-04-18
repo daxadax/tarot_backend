@@ -2,7 +2,10 @@ require "spec_helper"
 
 class CardSpec < EntitySpec
   let(:arcana) { :major }
-  let(:card)   { Entities::Card.new(arcana) }
+  let(:card) { Entities::Card.new(arcana) }
+  let(:major_card) { Entities::MajorArcana.new('01') }
+  let(:non_court_card) { Entities::MinorArcana.new('w_02') }
+  let(:court_card) { Entities::MinorArcana.new('p_13') }
 
   describe "creation" do
     describe "without arcana" do
@@ -41,13 +44,9 @@ class CardSpec < EntitySpec
   end
 
   describe "court?" do
-    let(:major_card) { Entities::MajorArcana.new('01') }
-    let(:non_count_card) { Entities::MinorArcana.new('w_02') }
-    let(:court_card) { Entities::MinorArcana.new('p_13') }
-
     it "determines if the card is a court card" do
       assert_equal false, major_card.court?
-      assert_equal false, non_count_card.court?
+      assert_equal false, non_court_card.court?
       assert_equal true, court_card.court?
     end
   end

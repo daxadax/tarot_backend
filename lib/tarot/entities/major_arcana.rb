@@ -24,6 +24,10 @@ module Tarot
         @title
       end
 
+      def court?
+        false
+      end
+
       private
 
       def determine_element(id)
