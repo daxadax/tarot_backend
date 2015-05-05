@@ -20,8 +20,7 @@ module Tarot
       private
 
       def card
-        result = Entities::Deck.new([@card_id]).deal
-        result.first
+        card_factory.get(@card_id)
       end
 
       def card_boundary

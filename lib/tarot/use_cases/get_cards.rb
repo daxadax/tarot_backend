@@ -28,7 +28,7 @@ module Tarot
 
       def initialize(input)
         input = Input.new(input)
-        @quantity = input.quantity
+        @quantity = input.quantity || 78
         @preset_cards = input.cards || []
         @moon = fetch_lunar_data(input.time_of_reading)
       end
@@ -73,8 +73,12 @@ module Tarot
       end
 
       def get_cards_for_spread
-        return Entities::Deck.new(preset_cards).deal if cards_specified?
-        Entities::Deck.new.deal(quantity)
+         if cards_specified?
+           card_factory.get_multiple preset_cards
+        else
+          cards = card_factory.all.shuffle
+          cards.first(quantity)
+        end
       end
 
       def get_count_for_cards

@@ -1,39 +1,22 @@
 require "spec_helper"
 
 class CardSpec < EntitySpec
-  let(:arcana) { :major }
-  let(:card) { Entities::Card.new(arcana) }
-  let(:major_card) { Entities::MajorArcana.new('01') }
-  let(:non_court_card) { Entities::MinorArcana.new('w_02') }
-  let(:court_card) { Entities::MinorArcana.new('p_13') }
+  let(:card) { build_card }
 
-  describe "creation" do
-    describe "without arcana" do
-      let(:arcana) { '' }
+  it "builds a card" do
+    assert_kind_of Entities::Card, card
+    assert_equal '07', card.id
+    assert_equal :major, card.arcana
+    assert_equal 'The Chariot', card.display_name
+    assert_equal [:water], card.element
+    assert_equal :trumps, card.suit
+    assert_equal [:cancer], card.astrological_signs
+  end
 
-      it "fails" do
-        exception = assert_failure { card }
-
-        assert_match /arcana/i, exception.message
-      end
-    end
-
-    describe "when arcana is not either :major or :minor" do
-      let(:arcana) { :a_different_level }
-
-      it "fails" do
-        assert_failure { card }
-      end
-    end
-
-    it "is successful given a correct arcana value" do
-      assert_kind_of Entities::Card, card
-      assert_equal arcana, card.arcana
-    end
-
-    it "has a chance to be reversed" do
-      assert_respond_to card, :reversed?
-    end
+  it 'sets correspondence' do
+    assert_includes card.correspondence.general, 'general'
+    assert_includes card.correspondence.elemental, 'elemental'
+    assert_includes card.correspondence.golden_dawn, 'golden_dawn'
   end
 
   describe "major?/minor?" do
@@ -44,9 +27,23 @@ class CardSpec < EntitySpec
   end
 
   describe "court?" do
+    let(:court_card_options) do
+      {
+        :id => 'c_14',
+        :arcana => :minor,
+        :display_name => "King of Cups",
+        :element => [:water],
+        :suit => :cups,
+        :court => true,
+        :astrological_signs => [:cancer]
+      }
+    end
+    let(:court_card) do
+      build_card attributes: court_card_options
+    end
+
     it "determines if the card is a court card" do
-      assert_equal false, major_card.court?
-      assert_equal false, non_court_card.court?
+      assert_equal false, card.court?
       assert_equal true, court_card.court?
     end
   end

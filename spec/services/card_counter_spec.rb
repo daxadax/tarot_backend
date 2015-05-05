@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 class CardCounterSpec < ServiceSpec
-  let(:cards) { Entities::Deck.new.deal }
+  let(:cards) { Services::CardFactory.new.all }
   let(:card_counter) { Services::CardCounter.new(cards) }
 
   describe "count" do
@@ -14,7 +14,6 @@ class CardCounterSpec < ServiceSpec
       assert_equal 14, result.cups
       assert_equal 14, result.swords
       assert_equal 16, result.court_cards
-      assert_kind_of Integer, result.reversed
     end
   end
 
@@ -28,7 +27,6 @@ class CardCounterSpec < ServiceSpec
       assert_equal 18, result.cups
       assert_equal 18, result.swords
       assert_equal 21, result.court_cards
-      assert_kind_of Integer, result.reversed
     end
   end
 

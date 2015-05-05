@@ -16,8 +16,7 @@ module Tarot
           :pentacles => count_for(:pentacles),
           :cups => count_for(:cups),
           :swords => count_for(:swords),
-          :court_cards => count_for(:court),
-          :reversed => count_for(:reversed)
+          :court_cards => count_for(:court)
         )
       end
 
@@ -28,8 +27,7 @@ module Tarot
           :pentacles => average_for(:pentacles),
           :cups => average_for(:cups),
           :swords => average_for(:swords),
-          :court_cards => average_for(:court),
-          :reversed => average_for(:reversed)
+          :court_cards => average_for(:court)
         )
       end
 
@@ -47,8 +45,6 @@ module Tarot
         case type
         when :major
           select_cards(:major?)
-        when :reversed
-          select_cards(:reversed?)
         when :court
           select_cards(:court?)
         else
@@ -62,7 +58,7 @@ module Tarot
 
       def select_minor_cards(type)
         cards.select do |card|
-          card.minor? && card.suit.name =~ /#{type}/i
+          card.minor? && card.suit =~ /#{type}/i
         end
       end
 
