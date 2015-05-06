@@ -25,6 +25,21 @@ class CardBoundarySpec < ServiceSpec
     assert_equal 'The Chariot', major_result.display_name
   end
 
+  it "grants access to 'suit'" do
+    assert_equal :cups, minor_result.suit
+    assert_equal :trumps, major_result.suit
+  end
+
+  it "grants access to 'element'" do
+    assert_equal [:water], minor_result.element
+    assert_equal [:water], major_result.element
+  end
+
+  it "grants access to 'astrological_signs'" do
+    assert_equal [:scorpio], minor_result.astrological_signs
+    assert_equal [:cancer], major_result.astrological_signs
+  end
+
   it "grants access to 'correspondence'" do
     assert_includes minor_result.correspondence, 'desire'
     assert_includes major_result.correspondence, 'inner conviction'
@@ -38,16 +53,6 @@ class CardBoundarySpec < ServiceSpec
   it "grants access to 'golden_dawn_correspondence'" do
     assert_empty minor_result.golden_dawn_correspondence
     assert_includes major_result.golden_dawn_correspondence, 'speech'
-  end
-
-  it "grants access to 'suit'" do
-    assert_equal :cups, minor_result.suit
-    assert_equal :trumps, major_result.suit
-  end
-
-  it "grants access to 'element'" do
-    assert_equal [:water], minor_result.element
-    assert_equal [:water], major_result.element
   end
 
   it "grants access to helper methods" do
