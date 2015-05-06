@@ -29,10 +29,10 @@ module Tarot
       class DeckBuilder
         def initialize
           @deck = Hash.new
-          @card_data = parse_data './data/cards.csv'
-          @general = parse_data './data/general.csv'
-          @elemental = parse_data './data/elemental.csv'
-          @golden_dawn = parse_data './data/golden_dawn.csv'
+          @card_data = parse_data 'cards'
+          @general = parse_data 'general'
+          @elemental = parse_data 'elemental'
+          @golden_dawn = parse_data 'golden_dawn'
         end
 
         def build
@@ -60,8 +60,14 @@ module Tarot
           end
         end
 
-        def parse_data(filename)
-          CSV.read(filename)[1..-1]
+        def parse_data(name)
+          path = data_path(name)
+          CSV.read(path)[1..-1]
+        end
+
+        def data_path(name)
+          relative = "../../../../data/#{name}.csv"
+          File.expand_path relative, __FILE__
         end
 
         def map_to_array(string)
