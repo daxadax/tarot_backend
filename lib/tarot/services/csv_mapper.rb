@@ -8,10 +8,10 @@ module Tarot
         cards.map do |card|
           {
             :id => card[0],
-            :arcana => card[1].to_sym,
+            :arcana => card[1],
             :display_name => card[2],
             :elements => map_to_array(card[3]),
-            :suit => card[4].to_sym,
+            :suit => card[4],
             :court => map_boolean(card[5].to_i),
             :astrological_signs => map_to_array(card[6])
           }
@@ -28,9 +28,7 @@ module Tarot
       private
 
       def parse_row(result, row)
-        value = row.last.empty? ? nil : row.last
-
-        result[row[0].to_sym] = value
+        result[row[0]] = row.last
         result
       end
 
@@ -45,7 +43,7 @@ module Tarot
       end
 
       def map_to_array(string)
-        string.split(', ').map(&:to_sym)
+        string.split(', ')
       end
 
       def map_boolean(int)

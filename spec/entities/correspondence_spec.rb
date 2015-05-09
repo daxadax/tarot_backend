@@ -3,8 +3,6 @@ require "spec_helper"
 class CorrespondenceSpec < EntitySpec
   let(:options) do
     {
-      :general => %w[general],
-      :elemental => %w[elemental],
       :golden_dawn => %w[golden_dawn]
     }
   end
@@ -13,8 +11,6 @@ class CorrespondenceSpec < EntitySpec
   end
 
   it 'builds a correspondence object' do
-    assert_equal options[:general], correspondence.general
-    assert_equal options[:elemental], correspondence.elemental
     assert_equal options[:golden_dawn], correspondence.golden_dawn
   end
 

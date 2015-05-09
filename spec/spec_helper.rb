@@ -22,20 +22,20 @@ class Minitest::Spec
   private
 
   def default_correspondence
-    Entities::Correspondence.new :general => %w[general],
-      :elemental => %w[elemental],
+    Entities::Correspondence.new(
       :golden_dawn => %w[golden_dawn]
+    )
   end
 
   def default_attributes
     {
       :id => '07',
-      :arcana => :major,
-      :display_name => "The Chariot",
-      :element => [:water],
-      :suit => :trumps,
+      :arcana => 'major',
+      :display_name => 'The Chariot',
+      :elements => ['water'],
+      :suit => 'trumps',
       :court => false,
-      :astrological_signs => [:cancer]
+      :astrological_signs => ['cancer']
     }
   end
 

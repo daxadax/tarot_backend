@@ -4,7 +4,7 @@ module Tarot
       attr_reader :id,
         :arcana,
         :display_name,
-        :element,
+        :elements,
         :suit,
         :astrological_signs,
         :correspondence
@@ -13,7 +13,7 @@ module Tarot
         @id = set_attribute attributes, :id
         @arcana = set_attribute attributes, :arcana
         @display_name = set_attribute attributes, :display_name
-        @element = set_attribute attributes, :element
+        @elements = set_attribute attributes, :elements
         @suit = set_attribute attributes, :suit
         @astrological_signs = set_attribute attributes, :astrological_signs
         @court_card = attributes[:court]
@@ -21,11 +21,11 @@ module Tarot
       end
 
       def major?
-        @arcana == :major
+        @arcana == 'major'
       end
 
       def minor?
-        @arcana == :minor
+        @arcana == 'minor'
       end
 
       def court?

@@ -13,11 +13,11 @@ class CardFactorySpec < ServiceSpec
 
     assert_kind_of Entities::Card, card
     assert_equal 'w_12', card.id
-    assert_equal :minor, card.arcana
+    assert_equal 'minor', card.arcana
     assert_equal 'Knight of Wands', card.display_name
-    assert_equal [:fire, :earth], card.element
-    assert_equal :wands, card.suit
-    assert_equal [:leo, :sagittarius], card.astrological_signs
+    assert_equal ['fire', 'earth'], card.elements
+    assert_equal 'wands', card.suit
+    assert_equal ['leo', 'sagittarius'], card.astrological_signs
     assert_equal true, card.court?
   end
 
@@ -42,14 +42,12 @@ class CardFactorySpec < ServiceSpec
     card = deck.last
 
     assert_equal '21', card.id
-    assert_equal :major, card.arcana
+    assert_equal 'major', card.arcana
     assert_equal 'The World', card.display_name
-    assert_equal [:earth], card.element
-    assert_equal :trumps, card.suit
-    assert_equal [:saturn], card.astrological_signs
+    assert_equal ['earth'], card.elements
+    assert_equal 'trumps', card.suit
+    assert_equal ['saturn'], card.astrological_signs
     assert_equal false, card.court?
-    assert_includes card.correspondence.general, 'essence'
-    assert_includes card.correspondence.elemental, 'financial'
     assert_includes card.correspondence.golden_dawn,
       'universal consciousness'
   end

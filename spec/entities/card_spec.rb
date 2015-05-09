@@ -6,16 +6,14 @@ class CardSpec < EntitySpec
   it "builds a card" do
     assert_kind_of Entities::Card, card
     assert_equal '07', card.id
-    assert_equal :major, card.arcana
+    assert_equal 'major', card.arcana
     assert_equal 'The Chariot', card.display_name
-    assert_equal [:water], card.element
-    assert_equal :trumps, card.suit
-    assert_equal [:cancer], card.astrological_signs
+    assert_equal ['water'], card.elements
+    assert_equal 'trumps', card.suit
+    assert_equal ['cancer'], card.astrological_signs
   end
 
   it 'sets correspondence' do
-    assert_includes card.correspondence.general, 'general'
-    assert_includes card.correspondence.elemental, 'elemental'
     assert_includes card.correspondence.golden_dawn, 'golden_dawn'
   end
 
@@ -30,12 +28,12 @@ class CardSpec < EntitySpec
     let(:court_card_options) do
       {
         :id => 'c_14',
-        :arcana => :minor,
-        :display_name => "King of Cups",
-        :element => [:water],
-        :suit => :cups,
+        :arcana => 'minor',
+        :display_name => 'King of Cups',
+        :elements => ['water'],
+        :suit => 'cups',
         :court => true,
-        :astrological_signs => [:cancer]
+        :astrological_signs => ['cancer']
       }
     end
     let(:court_card) do

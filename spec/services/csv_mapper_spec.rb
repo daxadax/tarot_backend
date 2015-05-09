@@ -13,12 +13,12 @@ class CsvMapperSpec < ServiceSpec
     it 'maps each value to the correct attribute' do
       card = result.detect { |c| c[:id] == '13' }
 
-      assert_equal :major, card[:arcana]
-      assert_equal "Death", card[:display_name]
-      assert_equal [:water], card[:elements]
-      assert_equal :trumps, card[:suit]
+      assert_equal 'major', card[:arcana]
+      assert_equal 'Death', card[:display_name]
+      assert_equal ['water'], card[:elements]
+      assert_equal 'trumps', card[:suit]
       assert_equal false, card[:court]
-      assert_equal [:scorpio], card[:astrological_signs]
+      assert_equal ['scorpio'], card[:astrological_signs]
     end
   end
 
@@ -28,17 +28,18 @@ class CsvMapperSpec < ServiceSpec
 
     it 'maps the correspondence to each given key' do
       assert_equal 36, result.keys.size
-      assert_includes result[:minor03], 'groups'
-      assert_includes result[:major13], 'point of no return'
+      assert_includes result['minor03'], 'groups'
+      assert_includes result['major13'], 'point of no return'
     end
 
     describe 'with blank values' do
       let(:file) { :golden_dawn }
 
-      it 'maps nil values to the corresponding keys' do
+      it 'maps nil values as empty arrays' do
         assert_equal 78, result.keys.size
-        assert_equal 'love', result[:c_03]
-        assert_nil result[:c_13]
+        assert_equal 'love', result['c_03']
+        assert_empty result['c_13']
+        assert_includes result['15'], 'bondage'
       end
     end
   end

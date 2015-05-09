@@ -1,13 +1,9 @@
 module Tarot
   module Entities
     class Correspondence < Entity
-      attr_reader :general,
-        :elemental,
-        :golden_dawn
+      attr_reader :golden_dawn
 
       def initialize(options)
-        @general = set_attribute options, :general
-        @elemental = set_attribute options, :elemental
         @golden_dawn = set_attribute options, :golden_dawn
       end
 
