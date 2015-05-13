@@ -15,5 +15,10 @@ class GetStaticCorrespondencesSpec < UseCaseSpec
 
     assert_includes rank['minor13'], 'ambition'
     assert_includes rank['major13'], 'point of no return'
+
+    astrological = result.astrological
+
+    assert_includes astrological['saturn'], 'the end of cycles'
+    assert_includes astrological['virgo'], 'health and illness'
   end
 end

@@ -4,6 +4,7 @@ module Tarot
   module UseCases
     class GetStaticCorrespondences < UseCase
       Result = Bound.required(
+        :astrological,
         :elemental,
         :rank
       )
@@ -14,6 +15,7 @@ module Tarot
 
       def call
         Result.new(
+          :astrological => read(:astrological),
           :elemental => read(:elemental),
           :rank => read(:rank)
         )
