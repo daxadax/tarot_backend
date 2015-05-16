@@ -3,15 +3,12 @@ module Tarot
     class MoonInfo < Service
 
       def initialize(time = nil)
-        @time = validate_and_return(time)
-      end
-
-      def age
-        get_age
+        @current_time = validate_and_return(time)
+        @lunar_data = fetch_data
       end
 
       def illumination
-        get_illumination
+        @illumination ||= @lunar_data[day][month].to_f
       end
 
       def phase
@@ -19,41 +16,16 @@ module Tarot
       end
 
       def waxing?
-        age < age_when_full
+        return true if @lunar_data[day - 1][month].to_f < illumination  
+        false
       end
 
       def waning?
-        age > age_when_full
+        return true unless waxing?
+        false
       end
 
       private
-
-      def current_cycle_progress
-        @progress ||= (lunation - lunation.floor).round(2)
-      end
-
-      def age_when_full
-        14.9
-      end
-
-      # this can be much more exact
-      def lunation
-        # from http://individual.utoronto.ca/kalendis/lunar/#M2L
-        @lunation ||= 12.3682665 * (time_delta / mary) - 0.184336
-      end
-
-      def get_age
-        @age ||= (mean_synodic_period * current_cycle_progress).round(2)
-      end
-
-      def get_illumination
-        if waxing?
-          (age / age_when_full).round(2)
-        else
-          relative_illumination = (age - age_when_full) / age_when_full
-          (1 - relative_illumination).round(2)
-        end
-      end
 
       def get_phase
         return :new if new?
@@ -66,57 +38,36 @@ module Tarot
         return :balsamic if balsamic?
       end
 
-      def mary # Mean Atomic Revolution Year
-        365.2421875
-      end
-
-      def mean_synodic_period
-        29.5305902778
-      end
-
-      def time_delta
-        now = time.to_i.to_f / one_day
-        now - j2000
-      end
-
-      def j2000
-        @j2000 ||= Time.utc(2000, 1, 1, 12).to_i.to_f / one_day
-      end
-
       def new?
-        age >= 28.5 || age < 1.5
+        return true if illumination.between?(0, 0.12)
       end
 
       def crescent?
-        age.between?(1.75, 5.75)
+        return true if waxing? && illumination.between?(0.12, 0.37)
       end
 
       def first_quarter?
-        age.between?(5.75, 10.25)
+        return true if waxing? && illumination.between?(0.37, 0.62)
       end
 
       def gibbous?
-        age.between?(10.25, 14)
+        return true if waxing? && illumination.between?(0.62, 0.87)
       end
 
       def full?
-        age.between?(14, 16.5)
+        return true if illumination.between?(0.87, 1)
       end
 
       def disseminating?
-        age.between?(16.5, 21.25)
+        return true if waning? && illumination.between?(0.62, 0.87)
       end
 
       def last_quarter?
-        age.between?(21.25, 24.75)
+        return true if waning? && illumination.between?(0.37, 0.62)
       end
 
       def balsamic?
-        age.between?(24.75, 28.5)
-      end
-
-      def one_day
-        24 * 3600
+        return true if waning? && illumination.between?(0.12, 0.37)
       end
 
       def validate_and_return(time)
@@ -128,7 +79,6 @@ module Tarot
       def validate_time!(time)
         return if time.nil?
         raise_utc_error(time) unless time.utc?
-        raise_temporal_error(time) unless time.year >= 2000
       end
 
       def raise_utc_error(time)
@@ -136,15 +86,23 @@ module Tarot
         raise ArgumentError, msg
       end
 
-      def raise_temporal_error(time)
-        msg = "Only timestamps after 2000 can be processed"
-        raise ArgumentError, msg
+      def fetch_data
+        relative = "../../../../data/lunar_illumination/#{year}.csv" 
+        file = File.expand_path(relative, __FILE__)
+        CSV.read(file)
       end
 
-      def time
-        @time
+      def year
+        @current_time.year
       end
 
+      def month
+        @current_time.month
+      end
+
+      def day
+        @current_time.day
+      end
     end
   end
 end
