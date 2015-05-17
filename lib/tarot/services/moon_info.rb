@@ -16,16 +16,24 @@ module Tarot
       end
 
       def waxing?
-        return true if @lunar_data[day - 1][month].to_f < illumination  
+        return false if new?
+        return false if full?
+        return true if growing? 
         false
       end
 
       def waning?
-        return true unless waxing?
+        return false if new?
+        return false if full?
+        return true unless growing?
         false
       end
 
       private
+
+      def growing?
+        @lunar_data[day - 1][month].to_f < illumination  
+      end
 
       def get_phase
         return :new if new?
@@ -39,35 +47,35 @@ module Tarot
       end
 
       def new?
-        return true if illumination.between?(0, 0.12)
+        return true if illumination == 0
       end
 
       def crescent?
-        return true if waxing? && illumination.between?(0.12, 0.37)
+        return true if waxing? && illumination.between?(0.01, 0.33)
       end
 
       def first_quarter?
-        return true if waxing? && illumination.between?(0.37, 0.62)
+        return true if waxing? && illumination.between?(0.34, 0.66)
       end
 
       def gibbous?
-        return true if waxing? && illumination.between?(0.62, 0.87)
+        return true if waxing? && illumination.between?(0.67, 0.99)
       end
 
       def full?
-        return true if illumination.between?(0.87, 1)
+        return true if illumination == 1
       end
 
       def disseminating?
-        return true if waning? && illumination.between?(0.62, 0.87)
+        return true if waning? && illumination.between?(0.67, 0.99)
       end
 
       def last_quarter?
-        return true if waning? && illumination.between?(0.37, 0.62)
+        return true if waning? && illumination.between?(0.34, 0.66)
       end
 
       def balsamic?
-        return true if waning? && illumination.between?(0.12, 0.37)
+        return true if waning? && illumination.between?(0.01, 0.33)
       end
 
       def validate_and_return(time)

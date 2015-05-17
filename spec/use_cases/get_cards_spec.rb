@@ -59,7 +59,7 @@ class GetCardsSpec < UseCaseSpec
         assert_equal 1, result.moon.illumination
         assert_equal :full, result.moon.phase
         assert_equal false, result.moon.is_waxing
-        assert_equal true, result.moon.is_waning
+        assert_equal false, result.moon.is_waning
       end
     end
 
