@@ -16,20 +16,22 @@ module Tarot
       end
 
       def waxing?
-        return false if new?
-        return false if full?
+        return false if terminal?
         return true if growing? 
         false
       end
 
       def waning?
-        return false if new?
-        return false if full?
+        return false if terminal?
         return true unless growing?
         false
       end
 
       private
+
+      def terminal?
+        full? || new?
+      end
 
       def growing?
         @lunar_data[day - 1][month].to_f < illumination  
@@ -37,47 +39,38 @@ module Tarot
 
       def get_phase
         return :new if new?
-        return :crescent if crescent?
-        return :first_quarter if first_quarter?
-        return :gibbous if gibbous?
         return :full if full?
-        return :disseminating if disseminating?
-        return :last_quarter if last_quarter?
-        return :balsamic if balsamic?
+        if waxing? 
+          return :crescent if small?
+          return :first_quarter if medium?
+          return :gibbous if large?
+        else 
+          return :disseminating if large?
+          return :last_quarter if medium?
+          return :balsamic if small?
+        end
       end
 
       def new?
         return true if illumination == 0
       end
-
-      def crescent?
-        return true if waxing? && illumination.between?(0.01, 0.33)
-      end
-
-      def first_quarter?
-        return true if waxing? && illumination.between?(0.34, 0.66)
-      end
-
-      def gibbous?
-        return true if waxing? && illumination.between?(0.67, 0.99)
-      end
-
+      
       def full?
         return true if illumination == 1
       end
 
-      def disseminating?
-        return true if waning? && illumination.between?(0.67, 0.99)
+      def small?
+        illumination.between?(0.01, 0.33)
       end
 
-      def last_quarter?
-        return true if waning? && illumination.between?(0.34, 0.66)
+      def medium?
+        illumination.between?(0.34, 0.66)
       end
 
-      def balsamic?
-        return true if waning? && illumination.between?(0.01, 0.33)
+      def large?
+        illumination.between?(0.67, 0.99)
       end
-
+      
       def validate_and_return(time)
         validate_time!(time)
         t = time || Time.now.utc
