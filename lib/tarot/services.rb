@@ -4,6 +4,7 @@ require 'tarot/services/card_factory'
 require 'tarot/services/card_boundary'
 require 'tarot/services/csv_mapper'
 require 'tarot/services/moon_info'
+require 'tarot/services/significant_influences'
 
 module Tarot
   module Services
