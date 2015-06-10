@@ -58,6 +58,7 @@ class GetCardsSpec < UseCaseSpec
       it 'returns information about the current lunar cycle' do
         assert_equal 1, result.moon.illumination
         assert_equal :full, result.moon.phase
+        assert_equal [:fire], result.moon.active_elements
         assert_equal false, result.moon.is_waxing
         assert_equal false, result.moon.is_waning
       end

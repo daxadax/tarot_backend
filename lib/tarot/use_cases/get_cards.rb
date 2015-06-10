@@ -6,6 +6,7 @@ module Tarot
 
       Card = Services::CardBoundary::Card
       Moon = Bound.required(
+        :active_elements,
         :illumination,
         :phase,
         :is_waxing,
@@ -51,6 +52,7 @@ module Tarot
 
       def build_moon
         Moon.new(
+          :active_elements => moon.active_elements,
           :illumination => moon.illumination,
           :phase => moon.phase,
           :is_waxing => moon.waxing?,
