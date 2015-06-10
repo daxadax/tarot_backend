@@ -5,6 +5,7 @@ module Tarot
       def initialize(time = nil)
         @current_time = validate_and_return(time)
         @lunar_data = fetch_data
+        @active_elements = []
       end
 
       def illumination
@@ -13,6 +14,10 @@ module Tarot
 
       def phase
         get_phase
+      end
+
+      def active_elements
+        get_active_elements
       end
 
       def waxing?
@@ -51,6 +56,14 @@ module Tarot
         end
       end
 
+      def get_active_elements
+        add_element(:earth) if small?
+        add_element(:fire) if large?
+        add_element(:air) if waxing?
+        add_element(:water) if waning?
+        @active_elements
+      end
+
       def new?
         return true if illumination == 0
       end
@@ -60,7 +73,7 @@ module Tarot
       end
 
       def small?
-        illumination.between?(0.01, 0.33)
+        illumination.between?(0.00, 0.33)
       end
 
       def medium?
@@ -68,9 +81,13 @@ module Tarot
       end
 
       def large?
-        illumination.between?(0.67, 0.99)
+        illumination.between?(0.67, 1)
       end
-      
+     
+      def add_element(element)
+        @active_elements << element
+      end
+
       def validate_and_return(time)
         validate_time!(time)
         t = time || Time.now.utc
