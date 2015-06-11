@@ -33,7 +33,6 @@ class GetCardsSpec < UseCaseSpec
       assert_predicate result, :cards
       assert_predicate result, :count
       assert_predicate result, :average
-      assert_predicate result, :moon
     end
 
     it "returns the right number of cards for the used spread" do
@@ -50,18 +49,6 @@ class GetCardsSpec < UseCaseSpec
     it "returns the correct stats for the dealt spread" do
       assert_equal expected_size, result.count.trumps
       assert_equal expected_average, result.average.trumps
-    end
-
-    describe 'moon' do
-      let(:time_of_reading) { Time.utc(2015,4,5) }
-
-      it 'returns information about the current lunar cycle' do
-        assert_equal 1, result.moon.illumination
-        assert_equal :full, result.moon.phase
-        assert_equal [:fire], result.moon.active_elements
-        assert_equal false, result.moon.is_waxing
-        assert_equal false, result.moon.is_waning
-      end
     end
 
     def expected_size
