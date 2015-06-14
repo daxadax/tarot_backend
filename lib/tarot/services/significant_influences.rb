@@ -16,7 +16,7 @@ module Tarot
       end
 
       def calculate
-       Influences.new determine_influences 
+        Influences.new determine_influences 
       end
 
       private
