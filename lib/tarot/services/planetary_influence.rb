@@ -1,35 +1,9 @@
 module Tarot
   module Services
     class PlanetaryInfluence < Service
-      Influences = Bound.new(
-        :ruling_signs,
-        :ruling_planets,
-        :decan_planet,
-        :daily_planet,
-        :yearly_planet,
-        :cyclic_planet
-      )
-      
       def initialize(time_of_reading = nil)
         @time_of_reading = validate!(time_of_reading)
         @ruling_signs = []
-      end
-
-      def calculate
-        Influences.new determine_influences 
-      end
-
-      private
-
-      def determine_influences
-        {
-          :ruling_signs => ruling_signs,
-          :ruling_planets => ruling_planets,
-          :decan_planet => decan_planet,
-          :daily_planet => daily_planet,
-          :yearly_planet => yearly_planet,
-          :cyclic_planet => cyclic_planet
-        }
       end
 
       def ruling_signs
@@ -115,6 +89,8 @@ module Tarot
       def cyclic_planet
         cyclic_rotation[current_cycle_number]
       end
+
+      private
 
       def current_cycle_number
         (time_since_known_cycle / cycle_length).floor
