@@ -16,8 +16,8 @@ class CardBoundarySpec < ServiceSpec
   end
 
   it "grants access to 'arcana'" do
-    assert_equal 'minor',  minor_result.arcana
-    assert_equal 'major',  major_result.arcana
+    assert_equal :minor,  minor_result.arcana
+    assert_equal :major,  major_result.arcana
   end
 
   it "grants access to 'display_name" do
@@ -26,18 +26,18 @@ class CardBoundarySpec < ServiceSpec
   end
 
   it "grants access to 'suit'" do
-    assert_equal 'cups', minor_result.suit
-    assert_equal 'trumps', major_result.suit
+    assert_equal :cups, minor_result.suit
+    assert_equal :trumps, major_result.suit
   end
 
   it "grants access to 'elements'" do
-    assert_equal ['water'], minor_result.elements
-    assert_equal ['water'], major_result.elements
+    assert_equal [:water], minor_result.elements
+    assert_equal [:water], major_result.elements
   end
 
   it "grants access to 'astrological_signs'" do
-    assert_equal ['scorpio'], minor_result.astrological_signs
-    assert_equal ['cancer'], major_result.astrological_signs
+    assert_equal [:scorpio], minor_result.astrological_signs
+    assert_equal [:cancer], major_result.astrological_signs
   end
 
   it "grants access to golden_dawn correspondence" do
@@ -54,5 +54,4 @@ class CardBoundarySpec < ServiceSpec
     assert_equal true, minor_result.is_court_card
     assert_equal false, major_result.is_court_card
   end
-
 end
