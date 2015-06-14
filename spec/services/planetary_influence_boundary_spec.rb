@@ -18,7 +18,7 @@ class PlanetaryInfluenceBoundarySpec < ServiceSpec
   end
 
   it "grants access to 'daily_planet'" do
-    assert_equal :moon, result.daily_planet
+    assert_equal :luna, result.daily_planet
   end
 
   it "grants access to 'yearly_planet'" do
@@ -26,6 +26,6 @@ class PlanetaryInfluenceBoundarySpec < ServiceSpec
   end
 
   it "grants access to 'cyclic_planet'" do
-    assert_equal :sun, result.cyclic_planet
+    assert_equal :sol, result.cyclic_planet
   end
 end

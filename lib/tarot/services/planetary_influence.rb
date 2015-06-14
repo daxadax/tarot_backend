@@ -71,8 +71,8 @@ module Tarot
       end
 
       def daily_planet
-        return :sun if time_of_reading.sunday?
-        return :moon if time_of_reading.monday?
+        return :sol if time_of_reading.sunday?
+        return :luna if time_of_reading.monday?
         return :mars if time_of_reading.tuesday?
         return :mercury if time_of_reading.wednesday? 
         return :jupiter if time_of_reading.thursday?
@@ -114,13 +114,13 @@ module Tarot
       end
 
       def cyclic_rotation
-        %i[mars moon sun saturn venus jupiter mercury]
+        %i[mars luna sol saturn venus jupiter mercury]
       end
 
       def yearly_rotation
         #starts with first planet of current cycle, then loops in this order:
         #sun venus mercury moon saturn jupiter mars
-        %i[mars sun venus mercury moon saturn jupiter]
+        %i[mars sol venus mercury luna saturn jupiter]
       end
 
       def determine_ruling_signs
@@ -149,8 +149,8 @@ module Tarot
           :aries => :mars,
           :taurus => :venus,
           :gemini => :mercury,
-          :cancer => :moon,
-          :leo => :sun,
+          :cancer => :luna,
+          :leo => :sol,
           :virgo => :mercury,
           :libra => :venus,
           :scorpio => :mars,
@@ -162,8 +162,8 @@ module Tarot
       def decan_planet_lookup
         {
           :mars => [*70..89, *184..193, *224..233, *296..304, *336..345],
-          :moon => [*61..69, *172..183, *315..325],
-          :sun => [*90..99, *204..213, *346..355],
+          :luna => [*61..69, *172..183, *315..325],
+          :sol => [*90..99, *204..213, *346..355],
           :saturn => [*21..30, *130..139, *160..171, *244..253, *276..285, *356..366],
           :venus => [*1..10, *41..50, *110..119, *150..159, *254..275],
           :jupiter => [*51..60, *100..109, *194..203, *214..223, *305..314, *326..335],

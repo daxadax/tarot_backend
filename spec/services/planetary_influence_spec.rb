@@ -29,7 +29,7 @@ class PlanetaryInfluenceSpec < ServiceSpec
     assert_equal :jupiter, service.decan_planet
     assert_equal :venus, service.daily_planet
     assert_equal :jupiter, service.yearly_planet
-    assert_equal :sun, service.cyclic_planet
+    assert_equal :sol, service.cyclic_planet
   end
 
   describe 'on a leap year' do 
@@ -40,8 +40,8 @@ class PlanetaryInfluenceSpec < ServiceSpec
       assert_equal [:venus, :mercury], service.ruling_planets
       assert_equal :saturn, service.decan_planet
       assert_equal :jupiter, service.daily_planet
-      assert_equal :sun, service.yearly_planet
-      assert_equal :sun, service.cyclic_planet  
+      assert_equal :sol, service.yearly_planet
+      assert_equal :sol, service.cyclic_planet  
     end
   end
 
