@@ -57,10 +57,10 @@ module Tarot
       end
 
       def get_active_elements
-        add_element(:earth) if small?
-        add_element(:fire) if large?
-        add_element(:air) if waxing?
-        add_element(:water) if waning?
+        add_element('earth') if small?
+        add_element('fire') if large?
+        add_element('air') if waxing?
+        add_element('water') if waning?
         @active_elements
       end
 

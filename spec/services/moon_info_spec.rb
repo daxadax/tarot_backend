@@ -33,7 +33,7 @@ class MoonInfoSpec < ServiceSpec
           assert_equal false, moon_info.waxing?
           assert_equal false, moon_info.waning?
           assert_equal :new, moon_info.phase
-          assert_equal [:earth], moon_info.active_elements
+          assert_equal ['earth'], moon_info.active_elements
         end
       end
 
@@ -45,7 +45,7 @@ class MoonInfoSpec < ServiceSpec
           assert_equal :crescent, moon_info.phase
           assert_equal true, moon_info.waxing?
           assert_equal false, moon_info.waning?
-          assert_equal [:air, :earth], moon_info.active_elements.sort
+          assert_equal ['air', 'earth'], moon_info.active_elements.sort
         end
       end
  
@@ -57,7 +57,7 @@ class MoonInfoSpec < ServiceSpec
           assert_equal true, moon_info.waxing?
           assert_equal false, moon_info.waning?
           assert_equal :first_quarter, moon_info.phase
-          assert_equal [:air], moon_info.active_elements
+          assert_equal ['air'], moon_info.active_elements
         end
       end
 
@@ -69,7 +69,7 @@ class MoonInfoSpec < ServiceSpec
           assert_equal true, moon_info.waxing?
           assert_equal false, moon_info.waning?
           assert_equal :gibbous, moon_info.phase
-          assert_equal [:air, :fire], moon_info.active_elements.sort
+          assert_equal ['air', 'fire'], moon_info.active_elements.sort
         end
       end
 
@@ -81,7 +81,7 @@ class MoonInfoSpec < ServiceSpec
           assert_equal false, moon_info.waxing?
           assert_equal false, moon_info.waning?
           assert_equal :full, moon_info.phase
-          assert_equal [:fire], moon_info.active_elements
+          assert_equal ['fire'], moon_info.active_elements
         end
       end
 
@@ -93,7 +93,7 @@ class MoonInfoSpec < ServiceSpec
           assert_equal false, moon_info.waxing?
           assert_equal true, moon_info.waning?
           assert_equal :disseminating, moon_info.phase
-          assert_equal [:fire, :water], moon_info.active_elements.sort
+          assert_equal ['fire', 'water'], moon_info.active_elements.sort
         end
       end
 
@@ -105,7 +105,7 @@ class MoonInfoSpec < ServiceSpec
           assert_equal false, moon_info.waxing?
           assert_equal true, moon_info.waning?
           assert_equal :last_quarter, moon_info.phase
-          assert_equal [:water], moon_info.active_elements
+          assert_equal ['water'], moon_info.active_elements
         end
       end
 
@@ -117,7 +117,7 @@ class MoonInfoSpec < ServiceSpec
           assert_equal false, moon_info.waxing?
           assert_equal true, moon_info.waning?
           assert_equal :balsamic, moon_info.phase
-          assert_equal [:earth, :water], moon_info.active_elements.sort
+          assert_equal ['earth', 'water'], moon_info.active_elements.sort
         end
       end
 
