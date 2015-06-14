@@ -20,15 +20,17 @@ module Tarot
 
       def map_correspondence(filename)
         data = parse_data(filename)
+        options = (filename == :golden_dawn ? {} : {symbolize_keys: true})
         data.inject({}) do |result, row|
-          parse_row(result, row)
+          parse_row(result, row, options)
         end
       end
 
       private
 
-      def parse_row(result, row)
-        result[row[0]] = row.last
+      def parse_row(result, row, options = {})
+        key = options[:symbolize_keys] ? row[0].to_sym : row[0]
+        result[key] = row.last
         result
       end
 

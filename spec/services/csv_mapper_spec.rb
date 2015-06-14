@@ -26,10 +26,10 @@ class CsvMapperSpec < ServiceSpec
     let(:file) { :rank }
     let(:result) { reader.map_correspondence(file) }
 
-    it 'maps the correspondence to each given key' do
+    it 'maps the correspondence to each given (symbolized) key' do
       assert_equal 36, result.keys.size
-      assert_includes result['minor03'], 'groups'
-      assert_includes result['major13'], 'point of no return'
+      assert_includes result[:minor03], 'groups'
+      assert_includes result[:major13], 'point of no return'
     end
 
     describe 'with blank values' do
