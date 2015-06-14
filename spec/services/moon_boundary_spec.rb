@@ -14,7 +14,7 @@ class MoonBoundarySpec < ServiceSpec
   end
 
   it "grants access to 'active_elements' as strings" do
-    assert_equal ['earth', 'air'], result.active_elements
+    assert_equal [:earth, :air], result.active_elements
   end
 
   it "grants access to 'is_waxing'" do

@@ -14,7 +14,7 @@ module Tarot
       def at(time)
         moon = fetch_lunar_data(time)
         Moon.new(
-          :active_elements => moon.active_elements,
+          :active_elements => moon.active_elements.map(&:to_sym),
           :illumination => moon.illumination,
           :phase => moon.phase,
           :is_waxing => moon.waxing?,
