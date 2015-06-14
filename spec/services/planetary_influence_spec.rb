@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-class SignificantInfluencesSpec < ServiceSpec
+class PlanetaryInfluenceSpec < ServiceSpec
 
-  let(:service) { Services::SignificantInfluences.new(time_of_reading) }
+  let(:service) { Services::PlanetaryInfluence.new(time_of_reading) }
   let(:time_of_reading) { Time.utc(2001,2,23,16,20) }
   let(:result) { service.calculate }
 

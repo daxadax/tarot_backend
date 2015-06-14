@@ -1,6 +1,6 @@
 module Tarot
   module Services
-    class SignificantInfluences < Service
+    class PlanetaryInfluence < Service
       Influences = Bound.new(
         :ruling_signs,
         :ruling_planets,
