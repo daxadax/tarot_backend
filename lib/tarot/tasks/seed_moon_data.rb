@@ -1,14 +1,13 @@
-#!/usr/bin/env ruby
-
 require 'open-uri'
 require 'csv'
 
-class MoonDataSeeder
+class SeedMoonData < Task
+  # filename = "#{year}_lunar_illumination.csv"
 
-  def initialize(year, filename)
+  def initialize(year = Time.now.year, feed_data = nil)
     @year = year.to_i
-    @filename = filename
-  end  
+    @feed_data = feed_data || fetch_feed_data
+  end
 
   def seed
     convert_to_csv
@@ -17,18 +16,21 @@ class MoonDataSeeder
   private
 
   def convert_to_csv
-    CSV.open(filename, 'wb', :force_quotes => true) do |csv|
+    CSV.generate(force_quotes: true) do |csv|
       feed_data.each { |row| csv << row }
     end
   end
 
-  def feed_data
-    @feed_data ||= fetch_feed_data
+  def parsed_data
+    @parsed_data ||= parse_feed_data
   end
 
-  def fetch_feed_data
+  def feed_data
+    @feed_data
+  end
+
+  def parse_feed_data
     # http://stackoverflow.com/a/30278554/2128691
-    data = open(feed_uri).read
     lines = [data.lines[-39]] + data.lines[-37..-7]
     lines.map do |line|
       line.strip!
@@ -42,22 +44,17 @@ class MoonDataSeeder
       end.map(&:strip)
     end
   end
-  
-  def feed_uri
-    host = "http://aa.usno.navy.mil/cgi-bin/aa_moonill2.pl" 
+
+  def fetch_feed_data
+    open(feed_uri).read
+  end
+
+  def default_feed_uri
+    host = "http://aa.usno.navy.mil/cgi-bin/aa_moonill2.pl"
     host + "?form=2&year=#{year}&task=00&tz=0&tz_sign=-1"
   end
 
   def year
     @year
   end
-
-  def filename
-    @filename
-  end
 end
-
-year = ARGV[0] || Time.now.year
-filename = ARGV[1] || "#{year}_lunar_illumination.csv"
-
-MoonDataSeeder.new(year, filename).seed
