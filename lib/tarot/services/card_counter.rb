@@ -10,66 +10,40 @@ module Tarot
       end
 
       def count
-        OpenStruct.new(
-          :trumps => count_for(:major),
-          :wands => count_for(:wands),
-          :pentacles => count_for(:pentacles),
-          :cups => count_for(:cups),
-          :swords => count_for(:swords),
-          :court_cards => count_for(:court)
-        )
-      end
-
-      def average
-        OpenStruct.new(
-          :trumps => average_for(:major),
-          :wands => average_for(:wands),
-          :pentacles => average_for(:pentacles),
-          :cups => average_for(:cups),
-          :swords => average_for(:swords),
-          :court_cards => average_for(:court)
-        )
+        cards.each_with_index.inject({}) do |result, (card, index)|
+          previous_result = index.zero? ? [] : count_hash(result[index - 1])
+          result[index] = count_symbols(card, previous_result)
+          result
+        end
       end
 
       private
 
-      def count_for(type)
-        card_stats(type).count
-      end
+      def count_symbols(card, previous_result)
+        symbols = fetch_symbols(card, previous_result)
 
-      def average_for(type)
-        (count_for(type)/cards.count.to_f * 100).round
-      end
-
-      def get_cards(type)
-        case type
-        when :major
-          select_cards(:major?)
-        when :court
-          select_cards(:court?)
-        else
-          select_minor_cards(type)
+        symbols.inject(Hash.new(0)) do |result, symbol|
+          result[symbol] += 1
+          result
         end
       end
 
-      def select_cards(type)
-        cards.select { |card| card.public_send type }
+      def fetch_symbols(card, previous)
+        previous + [
+          card.elements,
+          card.astrological_signs
+        ].flatten.map(&:to_sym)
       end
 
-      def select_minor_cards(type)
-        cards.select do |card|
-          card.minor? && card.suit =~ /#{type}/i
+      def count_hash(hash)
+        hash.flat_map do |symbol, count|
+          [symbol] * count
         end
-      end
-
-      def card_stats(type)
-        @card_stats.fetch(type) { get_cards(type) }
       end
 
       def cards
         @cards
       end
-
     end
   end
 end

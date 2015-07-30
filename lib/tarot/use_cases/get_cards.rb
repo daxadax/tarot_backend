@@ -12,7 +12,6 @@ module Tarot
 
       Result = Bound.required(
         :count,
-        :average,
         :cards => [Card]
       )
 
@@ -25,8 +24,7 @@ module Tarot
       def call
         Result.new(
           :cards => build_cards,
-          :count => count_for_cards,
-          :average => avg_for_cards
+          :count => count_for_cards
         )
       end
 
@@ -46,10 +44,6 @@ module Tarot
         @count_for_cards ||= get_count_for_cards
       end
 
-      def avg_for_cards
-        @avg_for_cards ||= get_avg_for_cards
-      end
-
       def get_cards_for_spread
          if cards_specified?
            card_factory.get_multiple preset_cards
@@ -61,10 +55,6 @@ module Tarot
 
       def get_count_for_cards
         card_counter.count
-      end
-
-      def get_avg_for_cards
-        card_counter.average
       end
 
       def cards_specified?
