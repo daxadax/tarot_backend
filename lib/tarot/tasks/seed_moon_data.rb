@@ -4,11 +4,10 @@ require 'csv'
 module Tarot
   module Tasks
     class SeedMoonData < Task
-      # filename = "#{year}_lunar_illumination.csv"
-
-      def initialize(year = Time.now.year, feed_data = nil)
+      def initialize(year = Time.now.year, feed_data = nil, path = nil)
         @year = year.to_i
         @feed_data = feed_data
+        @path = path || "data/lunar_illumination/#{year}.csv"
       end
 
       def run
@@ -18,7 +17,7 @@ module Tarot
       private
 
       def convert_to_csv
-        CSV.generate(force_quotes: true) do |csv|
+        CSV.open(@path, 'wb', force_quotes: true) do |csv|
           parsed_data.each { |row| csv << row }
         end
       end
