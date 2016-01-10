@@ -29,11 +29,11 @@ module Tarot
       def build_boundary(card)
         Card.new(
           :id => card.id,
-          :arcana => card.arcana,
+          :arcana => card.arcana.to_sym,
           :display_name => card.display_name,
-          :elements => card.elements,
-          :suit => card.suit,
-          :astrological_signs => card.astrological_signs,
+          :elements => card.elements.map(&:to_sym),
+          :suit => card.suit.to_sym,
+          :astrological_signs => card.astrological_signs.map(&:to_sym),
           :is_minor => card.minor?,
           :is_major => card.major?,
           :is_court_card => card.court?,
