@@ -15,7 +15,7 @@ class CardCounterSpec < ServiceSpec
     it 'returns cumulative count data for each card drawn' do
       assert_equal expected_first, result[0]
       assert_equal expected_second, result[1]
-      assert_equal expected_last, result[2].sort
+      assert_equal expected_last, result[2]
     end
   end
 
@@ -39,13 +39,13 @@ class CardCounterSpec < ServiceSpec
 
   def expected_last
     {
-      :fire => 1,
-      :sol => 1,
-      :aries => 1,
-      :water => 2,
-      :luna => 1,
       :air => 1,
-      :cancer => 1
-    }.sort
+      :aries => 1,
+      :cancer => 1,
+      :fire => 1,
+      :luna => 1,
+      :sol => 1,
+      :water => 2,
+    }
   end
 end
