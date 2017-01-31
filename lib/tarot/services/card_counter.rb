@@ -6,7 +6,6 @@ module Tarot
 
       def initialize(cards)
         @cards = cards
-        @card_stats = Hash.new
       end
 
       def count
