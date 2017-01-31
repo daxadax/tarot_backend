@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module Tarot
   module Services
     class CardCounter < Service
