@@ -21,14 +21,12 @@ module Tarot
           :is_waning => moon.waning?
         )
       end
-      
+
       private
 
       def fetch_lunar_data(time)
         Services::MoonInfo.new(time)
       end
-
-
     end
   end
 end
