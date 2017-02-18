@@ -23,14 +23,12 @@ module Tarot
           :cyclic_planet => data.cyclic_planet
         )
       end
-      
+
       private
 
       def fetch_planetary_data(time)
         Services::PlanetaryInfluence.new(time)
       end
-
-
     end
   end
 end
