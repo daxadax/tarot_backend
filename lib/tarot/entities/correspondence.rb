@@ -15,7 +15,6 @@ module Tarot
           raise ArgumentError, msg
         end
       end
-
     end
   end
 end

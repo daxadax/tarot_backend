@@ -27,5 +27,4 @@ class CorrespondenceSpec < EntitySpec
       assert_includes exception.message, "Missing required correspondence"
     end
   end
-
 end
