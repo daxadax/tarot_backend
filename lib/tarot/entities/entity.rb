@@ -1,6 +1,7 @@
 module Tarot
   module Entities
     class Entity
+      require './lib/tarot/support/validation_helpers'
       include Support::ValidationHelpers
     end
   end

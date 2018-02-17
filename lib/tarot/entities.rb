@@ -1,6 +1,4 @@
-require 'tarot/entities/entity'
-require 'tarot/entities/card'
-require 'tarot/entities/correspondence'
+Dir.glob("./lib/tarot/entities/*.rb") { |f| require f }
 
 module Tarot
   module Entities

@@ -3,13 +3,11 @@ require 'spec_helper'
 class GetCardsSpec < UseCaseSpec
   let(:quantity) { 3 }
   let(:cards) { nil }
-  let(:time_of_reading) { nil }
 
   let(:spread) do
     input = {
       :quantity => quantity,
       :cards => cards,
-      :time_of_reading => time_of_reading
     }
 
     UseCases::GetCards.new(input)
@@ -44,7 +42,7 @@ class GetCardsSpec < UseCaseSpec
     end
 
     describe "with cards pre-specified" do
-      let(:cards) { %w[w_03 c_10 00] }
+      let(:cards) { %w[w_03 c_10 t_00] }
 
       it "returns those cards" do
         assert_equal 3, result.cards.size

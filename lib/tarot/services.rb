@@ -1,8 +1,5 @@
-require 'tarot/services/service'
-require 'tarot/services/card_counter'
-require 'tarot/services/card_factory'
-require 'tarot/services/card_boundary'
-require 'tarot/services/csv_mapper'
+require './lib/tarot/services/service'
+Dir.glob("./lib/tarot/services/*.rb") { |f| require f }
 
 module Tarot
   module Services

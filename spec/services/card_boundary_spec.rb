@@ -3,7 +3,7 @@ require 'spec_helper'
 class CardBoundarySpec < ServiceSpec
   let(:card_factory) { Services::CardFactory.new }
   let(:minor_id) { 'c_13' }
-  let(:major_id) { '07' }
+  let(:major_id) { 't_07' }
   let(:minor) { card_factory.get(minor_id) }
   let(:major) { card_factory.get(major_id) }
   let(:boundary) { Services::CardBoundary.new }
@@ -21,8 +21,8 @@ class CardBoundarySpec < ServiceSpec
   end
 
   it "grants access to 'display_name" do
-    assert_equal 'Queen of Cups', minor_result.display_name
-    assert_equal 'The Chariot', major_result.display_name
+    assert_equal 'King of Cups', minor_result.display_name
+    assert_equal 'LE CHARIOT', major_result.display_name
   end
 
   it "grants access to 'suit'" do
@@ -31,18 +31,18 @@ class CardBoundarySpec < ServiceSpec
   end
 
   it "grants access to 'elements'" do
-    assert_equal [:water], minor_result.elements
-    assert_equal [:water], major_result.elements
+    assert_equal [:air, :water], minor_result.elements
+    assert_empty major_result.elements
   end
 
   it "grants access to 'astrological_signs'" do
     assert_equal [:scorpio], minor_result.astrological_signs
-    assert_equal [:cancer], major_result.astrological_signs
+    assert_empty major_result.astrological_signs
   end
 
-  it "grants access to golden_dawn correspondence" do
-    assert_empty minor_result.correspondence.golden_dawn
-    assert_includes major_result.correspondence.golden_dawn, 'speech'
+  it "grants access to correspondences of the given deck" do
+    assert_includes minor_result.correspondence.marseille, 'vast emotional experience'
+    assert_includes major_result.correspondence.marseille, 'resolute action'
   end
 
   it "grants access to helper methods" do

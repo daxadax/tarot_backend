@@ -5,9 +5,8 @@ module Tarot
     class GetCards < UseCase
       Card = Services::CardBoundary::Card
       Input = Bound.optional(
-        :quantity,
         :cards,
-        :time_of_reading
+        :quantity
       )
 
       Result = Bound.required(

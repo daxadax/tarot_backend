@@ -3,8 +3,9 @@ require 'csv'
 module Tarot
   module Services
     class CardFactory < Service
-
-      def initialize
+      def initialize(options = {})
+        @csv_mapper ||= Services::CsvMapper.new(options)
+        @deck = options.fetch(:deck) { Tarot::DEFAULT_DECK }
         @cards = build_cards
       end
 
@@ -21,6 +22,7 @@ module Tarot
       end
 
       private
+      attr_reader :csv_mapper, :deck
 
       def cards
         @cards
@@ -37,20 +39,15 @@ module Tarot
 
       def build_correspondence(card)
         options = {
-          :golden_dawn => golden_dawn[card[:id]]
+          deck.to_sym => deck_correspondences[card[:id]]
         }
 
         Entities::Correspondence.new(options)
       end
 
-      def golden_dawn
-        @gd ||= csv_mapper.map_correspondence(:golden_dawn)
+      def deck_correspondences
+        @dc ||= csv_mapper.map_correspondence(deck)
       end
-
-      def csv_mapper
-        @mapper ||= Services::CsvMapper.new
-      end
-
     end
   end
 end

@@ -5,32 +5,29 @@ module Tarot
     class GetStaticCorrespondences < UseCase
       Result = Bound.required(
         :astrological,
-        :elemental,
-        :rank
+        :elemental
       )
 
-      def initialize
-        @csv_mapper = Services::CsvMapper.new
+      def initialize(options = {})
+        @csv_mapper = Services::CsvMapper.new(options)
       end
 
       def call
         Result.new(
           :astrological => read(:astrological),
-          :elemental => read(:elemental),
-          :rank => read(:rank)
+          :elemental => read(:elemental)
         )
       end
 
       private
 
       def read(filename)
-        csv_mapper.map_correspondence(filename)
+        csv_mapper.map_correspondence(filename, symbolize_keys: true)
       end
 
       def csv_mapper
-        @csv_mapper 
+        @csv_mapper
       end
-
     end
   end
 end

@@ -3,7 +3,6 @@ require 'bound'
 module Tarot
   module UseCases
     class GetCard < UseCase
-
       Card = Services::CardBoundary::Card
       Input = Bound.required :card_id
       Result = Bound.required(:card => Card)
@@ -26,7 +25,6 @@ module Tarot
       def card_boundary
         Services::CardBoundary.new
       end
-
     end
   end
 end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 class GetCardSpec < UseCaseSpec
-  let(:card_id) { '00' }
+  let(:card_id) { 't_00' }
 
   let(:use_case) do
     input = {

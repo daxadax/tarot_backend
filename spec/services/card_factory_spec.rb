@@ -14,15 +14,15 @@ class CardFactorySpec < ServiceSpec
     assert_kind_of Entities::Card, card
     assert_equal 'w_12', card.id
     assert_equal 'minor', card.arcana
-    assert_equal 'Knight of Wands', card.display_name
-    assert_equal ['fire', 'earth'], card.elements
+    assert_equal 'Queen of Wands', card.display_name
+    assert_equal ['fire', 'water'], card.elements
     assert_equal 'wands', card.suit
-    assert_equal ['leo', 'sagittarius'], card.astrological_signs
+    assert_equal ['leo'], card.astrological_signs
     assert_equal true, card.court?
   end
 
   it 'can fetch several cards' do
-    ids = %w{ w_12' 20 s_01 c_10 }
+    ids = %w{ w_12 t_20 s_01 c_10 }
     cards = factory.get_multiple(ids)
 
     assert_equal 4, cards.size
@@ -41,14 +41,14 @@ class CardFactorySpec < ServiceSpec
   it 'correctly sets all attributes' do
     card = deck.last
 
-    assert_equal '21', card.id
+    assert_equal 't_21', card.id
     assert_equal 'major', card.arcana
-    assert_equal 'The World', card.display_name
-    assert_equal ['earth'], card.elements
+    assert_equal 'LE MONDE', card.display_name
+    assert_empty card.elements
     assert_equal 'trumps', card.suit
-    assert_equal ['saturn'], card.astrological_signs
+    assert_empty card.astrological_signs
     assert_equal false, card.court?
-    assert_includes card.correspondence.golden_dawn,
-      'universal consciousness'
+    assert_includes card.correspondence.marseille,
+      'great and total realization'
   end
 end

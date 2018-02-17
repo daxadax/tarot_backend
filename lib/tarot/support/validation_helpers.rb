@@ -1,7 +1,6 @@
 module Tarot
   module Support
     module ValidationHelpers
-
       def ensure_required_input!(name, arg, options = {})
         msg = "#{name.to_s} is required"
         raise_argument_error(msg, arg) if arg.nil?
@@ -20,7 +19,6 @@ module Tarot
 
         raise ArgumentError, msg + reason + inspection
       end
-
     end
   end
 end

@@ -5,7 +5,7 @@ class CardSpec < EntitySpec
 
   it "builds a card" do
     assert_kind_of Entities::Card, card
-    assert_equal '07', card.id
+    assert_equal 't_07', card.id
     assert_equal 'major', card.arcana
     assert_equal 'The Chariot', card.display_name
     assert_equal ['water'], card.elements
@@ -14,7 +14,7 @@ class CardSpec < EntitySpec
   end
 
   it 'sets correspondence' do
-    assert_includes card.correspondence.golden_dawn, 'golden_dawn'
+    assert_includes card.correspondence.marseille, 'marseille'
   end
 
   describe "major?/minor?" do

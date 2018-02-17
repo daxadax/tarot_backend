@@ -1,7 +1,5 @@
-require 'tarot/use_cases/use_case'
-require 'tarot/use_cases/get_cards'
-require 'tarot/use_cases/get_card'
-require 'tarot/use_cases/get_static_correspondences'
+require './lib/tarot/use_cases/use_case'
+Dir.glob("./lib/tarot/use_cases/*.rb") { |f| require f }
 
 module Tarot
   module UseCases

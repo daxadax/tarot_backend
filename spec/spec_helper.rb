@@ -23,13 +23,13 @@ class Minitest::Spec
 
   def default_correspondence
     Entities::Correspondence.new(
-      :golden_dawn => %w[golden_dawn]
+      marseille: %w[marseille]
     )
   end
 
   def default_attributes
     {
-      :id => '07',
+      :id => 't_07',
       :arcana => 'major',
       :display_name => 'The Chariot',
       :elements => ['water'],
@@ -38,5 +38,4 @@ class Minitest::Spec
       :astrological_signs => ['cancer']
     }
   end
-
 end

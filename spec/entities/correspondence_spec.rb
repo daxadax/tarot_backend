@@ -3,7 +3,8 @@ require "spec_helper"
 class CorrespondenceSpec < EntitySpec
   let(:options) do
     {
-      :golden_dawn => %w[golden_dawn]
+      :marseille => %w[marseille],
+      :rider_waite_smith => %w{rider waite smith}
     }
   end
   let(:correspondence) do
@@ -11,20 +12,7 @@ class CorrespondenceSpec < EntitySpec
   end
 
   it 'builds a correspondence object' do
-    assert_equal options[:golden_dawn], correspondence.golden_dawn
-  end
-
-  describe 'failure' do
-    let(:options) do
-      {
-        :other => %w[some other things]
-      }
-    end
-
-    it 'fails if required correspondences are not provided' do
-      exception = assert_raises(ArgumentError) { correspondence }
-
-      assert_includes exception.message, "Missing required correspondence"
-    end
+    assert_equal options[:marseille], correspondence.marseille
+    assert_equal options[:rider_waite_smith], correspondence.rider_waite_smith
   end
 end

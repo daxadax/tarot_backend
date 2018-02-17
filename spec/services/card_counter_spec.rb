@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 class CardCounterSpec < ServiceSpec
-  let(:card_ids) { %w[w_03 02 c_14] }
+  let(:card_ids) { %w[w_03 t_02 c_14] }
   let(:cards) { Services::CardFactory.new.get_multiple(card_ids) }
   let(:card_counter) { Services::CardCounter.new(cards) }
 
@@ -21,31 +21,22 @@ class CardCounterSpec < ServiceSpec
 
   def expected_first
     {
-      :fire => 1,
-      :sol => 1,
-      :aries => 1
+      :fire => 1
     }
   end
 
   def expected_second
     {
-      :fire => 1,
-      :sol => 1,
-      :aries => 1,
-      :water => 1,
-      :luna => 1
+      :fire => 1
     }
   end
 
   def expected_last
     {
-      :air => 1,
-      :aries => 1,
-      :cancer => 1,
       :fire => 1,
-      :luna => 1,
-      :sol => 1,
-      :water => 2,
+      :earth => 1,
+      :water => 1,
+      :pisces => 1
     }
   end
 end

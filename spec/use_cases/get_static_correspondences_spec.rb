@@ -10,11 +10,6 @@ class GetStaticCorrespondencesSpec < UseCaseSpec
     assert_includes elemental[:earth], 'practical'
     assert_includes elemental[:water], 'emotional'
     assert_includes elemental[:air], 'communication'
-  
-    rank = result.rank
-
-    assert_includes rank[:minor13], 'ambition'
-    assert_includes rank[:major13], 'point of no return'
 
     astrological = result.astrological
 

@@ -1,9 +1,6 @@
-require 'tarot/version'
-require_relative 'tarot/support/validation_helpers'
-require_relative 'tarot/entities'
-require_relative 'tarot/services'
-require_relative 'tarot/use_cases'
-require_relative 'tarot/tasks'
+Dir.glob("./lib/tarot/*.rb") { |f| require f }
 
 module Tarot
+  DEFAULT_DECK = :marseille # What deck is used when none is specified?
+  AVAILABLE_DECKS = [:marseille, :rider_waite_smith]
 end

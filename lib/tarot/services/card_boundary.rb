@@ -3,8 +3,9 @@ require 'bound'
 module Tarot
   module Services
     class CardBoundary < Service
-      Correspondence = Bound.required(
-        :golden_dawn
+      Correspondence = Bound.optional(
+        :marseille,
+        :rider_waite_smith
       )
 
       Card = Bound.required(
@@ -28,17 +29,18 @@ module Tarot
 
       def build_boundary(card)
         Card.new(
-          :id => card.id,
-          :arcana => card.arcana.to_sym,
-          :display_name => card.display_name,
-          :elements => card.elements.map(&:to_sym),
-          :suit => card.suit.to_sym,
-          :astrological_signs => card.astrological_signs.map(&:to_sym),
-          :is_minor => card.minor?,
-          :is_major => card.major?,
-          :is_court_card => card.court?,
-          :correspondence => Correspondence.new(
-            :golden_dawn => card.correspondence.golden_dawn,
+          id: card.id,
+          arcana: card.arcana.to_sym,
+          display_name: card.display_name,
+          elements: card.elements.map(&:to_sym),
+          suit: card.suit.to_sym,
+          astrological_signs: card.astrological_signs.map(&:to_sym),
+          is_minor: card.minor?,
+          is_major: card.major?,
+          is_court_card: card.court?,
+          correspondence: Correspondence.new(
+            marseille: card.correspondence.marseille,
+            rider_waite_smith: card.correspondence.rider_waite_smith
           )
         )
       end
