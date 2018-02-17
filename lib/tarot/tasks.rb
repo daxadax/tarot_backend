@@ -1,4 +1,4 @@
-require 'tarot/tasks/task'
+require './lib/tarot/tasks/task'
 
 module Tarot
   module Tasks

@@ -8,3 +8,8 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['spec/**/*_spec.rb']
   t.verbose = true
 end
+
+desc 'drop into console'
+task :console do
+  sh "irb -r './lib/tarot'"
+end
