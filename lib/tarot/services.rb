@@ -1,5 +1,5 @@
-require './lib/tarot/services/service'
-Dir.glob("./lib/tarot/services/*.rb") { |f| require f }
+require 'tarot/services/service'
+Dir[File.join(__dir__, 'services', '*.rb')].each {|f| require f }
 
 module Tarot
   module Services

@@ -1,4 +1,4 @@
-Dir.glob("./lib/tarot/entities/*.rb") { |f| require f }
+Dir[File.join(__dir__, 'entities', '*.rb')].each {|f| require f }
 
 module Tarot
   module Entities
