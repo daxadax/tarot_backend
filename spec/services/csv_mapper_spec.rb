@@ -55,17 +55,6 @@ class CsvMapperSpec < ServiceSpec
         assert_includes result['p_09'], 'opportune crisis'
         assert_includes result['t_18'], 'femininity'
       end
-
-      describe 'with blank values' do
-        let(:file) { :thoth }
-
-        it 'maps nil values as empty arrays' do
-          assert_equal 78, result.keys.size
-          assert_equal 'love', result['c_03']
-          assert_empty result['c_13']
-          assert_includes result['t_15'], 'bondage'
-        end
-      end
     end
   end
 end
