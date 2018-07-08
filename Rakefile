@@ -1,5 +1,6 @@
 require 'rake/testtask'
 require_relative 'lib/tarot/tasks'
+require_relative 'lib/tarot/services'
 
 task :default => :test
 
